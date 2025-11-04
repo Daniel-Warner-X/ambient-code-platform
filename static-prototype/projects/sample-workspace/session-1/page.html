@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>session-1 - sample-project - Ambient Code Platform</title>
+    <title>session-1 - sample-workspace - Ambient Code Platform</title>
     <link rel="stylesheet" href="../../../styles.css">
     <style>
         .chat-container {
@@ -94,10 +94,7 @@
             <div class="header-content">
                 <a href="../../../index.html" class="logo">Ambient Code Platform</a>
                 <div style="display: flex; align-items: center; gap: 2rem;">
-                    <nav class="nav">
-                        <a href="../../../index.html">Projects</a>
-                        <a href="../../../integrations/page.html">Integrations</a>
-                    </nav>
+                    
                     <div class="user-dropdown" style="position: relative;">
                         <button onclick="toggleUserDropdown()" class="user-dropdown-trigger" style="display: flex; align-items: center; gap: 0.5rem; color: #64748b; font-size: 0.875rem; background: none; border: none; cursor: pointer; padding: 0.5rem; border-radius: 0.375rem; transition: background-color 0.2s;">
                             <div style="width: 24px; height: 24px; background: #64748b; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 500; font-size: 0.75rem;">
@@ -114,6 +111,15 @@
                                 <div style="color: #64748b; font-size: 0.75rem;">Demo User</div>
                             </div>
                             <div style="padding: 0.25rem;">
+                                <a href="../../../integrations/page.html" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; background: none; border: none; cursor: pointer; border-radius: 0.25rem; color: #374151; font-size: 0.875rem; transition: background-color 0.2s; display: block; text-decoration: none;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; margin-right: 0.5rem; vertical-align: middle;">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                        <path d="M2 17l10 5 10-5"/>
+                                        <path d="M2 12l10 5 10-5"/>
+                                    </svg>
+                                    Integrations
+                                </a>
+                                <hr style="margin: 0.25rem 0; border: none; border-top: 1px solid #e2e8f0;">
                                 <button onclick="logout()" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; background: none; border: none; cursor: pointer; border-radius: 0.25rem; color: #374151; font-size: 0.875rem; transition: background-color 0.2s;">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; margin-right: 0.5rem;">
                                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
@@ -133,9 +139,9 @@
     <div class="page-header">
         <div class="container">
             <div class="breadcrumbs">
-                <a href="../../../index.html">Projects</a>
+                <a href="../../../index.html">Workspaces</a>
                 <span>/</span>
-                <a href="../page.html">sample-project</a>
+                <a href="../page.html">sample-workspace</a>
                 <span>/</span>
                 <span>session-1</span>
             </div>
@@ -175,15 +181,120 @@
         <div style="display: grid; grid-template-columns: 380px 1fr; gap: 1.5rem; height: 75vh;">
             <!-- Left Column: Accordions -->
             <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <!-- Workflow Accordion -->
+                <div class="accordion-item">
+                    <button onclick="toggleAccordion('workflow')" class="accordion-header">
+                        <span>Workflows</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="workflow-arrow" style="transform: rotate(180deg);">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div id="workflow-content" class="accordion-content" style="display: block;">
+                        <div style="padding: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label" style="font-size: 0.875rem;">Select a Workflow</label>
+                                <select id="workflow-type" class="form-input" style="font-size: 0.875rem;" onchange="updateWorkflowPhases()">
+                                    <option value="default" selected>None selected</option>
+                                    <option value="create-rfe">Plan a feature</option>
+                                    <option value="create-feature">Develop Feature</option>
+                                </select>
+                            </div>
+
+                            <!-- Help text when None is selected -->
+                            <div id="workflow-help-text" style="margin-top: 1rem; font-size: 0.875rem; color: #64748b;">
+                                <div>Workflows provide a structured processes for Ambient Code Platform agents to follow and achieve complex goals.</div>
+                            </div>
+
+                            <!-- RFE Phases (shown when Create RFE is selected) -->
+                            <div id="rfe-phases" style="display: none; margin-top: 1rem;">
+                                <!-- Repository requirement message -->
+                                <div id="rfe-repo-requirement" style="padding: 1rem; text-align: center;">
+                                    <div style="color: #64748b; font-size: 0.875rem;">
+                                        A spec repository is required to store artifacts for this workflow.
+                                    </div>
+                                </div>
+
+                                <div style="font-size: 0.875rem; border: 1px solid #e2e8f0; border-radius: 0.375rem; overflow: hidden;">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: white;">
+                                        <span style="font-size: 1.25rem;">💡</span>
+                                        <div style="flex: 1;">
+                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Ideate</div>
+                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">Create or update rfe.md file</div>
+                                        </div>
+                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /ideate command" onclick="runIdeateCommand()">/ideate</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Spec Kit Phases (shown when Create Feature is selected) -->
+                            <div id="spec-kit-phases" style="display: none; margin-top: 1rem;">
+                                <!-- Repository requirement message -->
+                                <div id="spec-kit-repo-requirement" style="padding: 1rem; text-align: center;">
+                                    <div style="color: #64748b; font-size: 0.875rem;">
+                                        A spec repository is required to store artifacts for this workflow.
+                                    </div>
+                                </div>
+
+                                <div style="font-size: 0.875rem; border: 1px solid #e2e8f0; border-radius: 0.375rem; overflow: hidden;">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-bottom: 1px solid #e2e8f0; background: white;">
+                                        <span style="font-size: 1.25rem;">💡</span>
+                                        <div style="flex: 1;">
+                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Ideate</div>
+                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">Create or update rfe.md file</div>
+                                        </div>
+                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /ideate command" onclick="runIdeateCommand()">/ideate</button>
+                                    </div>
+
+                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-bottom: 1px solid #e2e8f0; background: white;">
+                                        <span style="font-size: 1.25rem;">📝</span>
+                                        <div style="flex: 1;">
+                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Specify</div>
+                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">Create or update spec.md file</div>
+                                        </div>
+                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /specify command" onclick="runSpecifyCommand()">/specify</button>
+                                    </div>
+
+                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-bottom: 1px solid #e2e8f0; background: white;">
+                                        <span style="font-size: 1.25rem;">📋</span>
+                                        <div style="flex: 1;">
+                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Plan</div>
+                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">plan.md</div>
+                                        </div>
+                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /plan command">/plan</button>
+                                    </div>
+
+                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-bottom: 1px solid #e2e8f0; background: white;">
+                                        <span style="font-size: 1.25rem;">✅</span>
+                                        <div style="flex: 1;">
+                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Tasks</div>
+                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">tasks.md</div>
+                                        </div>
+                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /tasks command">/tasks</button>
+                                    </div>
+
+                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: white;">
+                                        <span style="font-size: 1.25rem;">🏗️</span>
+                                        <div style="flex: 1;">
+                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Implement</div>
+                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">implement</div>
+                                        </div>
+                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /implement command">/implement</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Spec Repository Accordion -->
                 <div class="accordion-item">
                     <button onclick="toggleAccordion('spec-repository')" class="accordion-header">
                         <span>Spec Repository</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="spec-repository-arrow" style="transform: rotate(180deg);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="spec-repository-arrow">
                             <path d="M6 9l6 6 6-6"/>
                         </svg>
                     </button>
-                    <div id="spec-repository-content" class="accordion-content" style="display: block;">
+                    <div id="spec-repository-content" class="accordion-content" style="display: none;">
                         <div style="padding: 1rem; text-align: center;">
                             <div style="color: #64748b; font-size: 0.875rem; margin-bottom: 1rem;">
                                 A spec repository is required to store agent config and workflow artifacts.
@@ -351,120 +462,10 @@
                     </div>
                 </div>
 
-                <!-- Workflow Accordion -->
-                <div class="accordion-item">
-                    <button onclick="toggleAccordion('workflow')" class="accordion-header">
-                        <span>Workflows</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="workflow-arrow">
-                            <path d="M6 9l6 6 6-6"/>
-                        </svg>
-                    </button>
-                    <div id="workflow-content" class="accordion-content" style="display: none;">
-                        <div style="padding: 1rem;">
-                            <div class="form-group">
-                                <label class="form-label" style="font-size: 0.875rem;">Select a Workflow</label>
-                                <select id="workflow-type" class="form-input" style="font-size: 0.875rem;" onchange="updateWorkflowPhases()">
-                                    <option value="default" selected>None selected</option>
-                                    <option value="create-rfe">Create RFE</option>
-                                    <option value="create-feature">Create Feature (Spec Kit)</option>
-                                </select>
-                            </div>
-
-                            <!-- Help text when None is selected -->
-                            <div id="workflow-help-text" style="margin-top: 1rem; font-size: 0.875rem; color: #64748b;">
-                                <div>Workflows provide a structured processes for Ambient Code Platform agents to follow and achieve complex goals.</div>
-                            </div>
-
-                            <!-- RFE Phases (shown when Create RFE is selected) -->
-                            <div id="rfe-phases" style="display: none; margin-top: 1rem;">
-                                <!-- Repository requirement message -->
-                                <div id="rfe-repo-requirement" style="font-size: 0.875rem; color: #64748b; margin-bottom: 1rem; padding: 0.75rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.375rem;">
-                                    This workflow requires a spec repository to store generated artifacts.
-                                </div>
-
-                                <div style="font-size: 0.875rem; border: 1px solid #e2e8f0; border-radius: 0.375rem; overflow: hidden;">
-                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-bottom: 1px solid #e2e8f0; background: white;">
-                                        <span style="font-size: 1.25rem;">💡</span>
-                                        <div style="flex: 1;">
-                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Ideate</div>
-                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">Create or update rfe.md file</div>
-                                        </div>
-                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /ideate command" onclick="runIdeateCommand()">/ideate</button>
-                                    </div>
-
-                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: white;">
-                                        <span style="font-size: 1.25rem;">📝</span>
-                                        <div style="flex: 1;">
-                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Specify</div>
-                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">Create or update spec.md file</div>
-                                        </div>
-                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /specify command" onclick="runSpecifyCommand()">/specify</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Spec Kit Phases (shown when Create Feature is selected) -->
-                            <div id="spec-kit-phases" style="display: none; margin-top: 1rem;">
-                                <!-- Repository requirement message -->
-                                <div id="spec-kit-repo-requirement" style="font-size: 0.875rem; color: #64748b; margin-bottom: 1rem; padding: 0.75rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.375rem;">
-                                    This workflow requires a spec repository to store generated artifacts.
-                                </div>
-
-                                <div style="font-size: 0.875rem; border: 1px solid #e2e8f0; border-radius: 0.375rem; overflow: hidden;">
-                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-bottom: 1px solid #e2e8f0; background: white;">
-                                        <span style="font-size: 1.25rem;">💡</span>
-                                        <div style="flex: 1;">
-                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Ideate</div>
-                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">Create or update rfe.md file</div>
-                                        </div>
-                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /ideate command" onclick="runIdeateCommand()">/ideate</button>
-                                    </div>
-
-                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-bottom: 1px solid #e2e8f0; background: white;">
-                                        <span style="font-size: 1.25rem;">📝</span>
-                                        <div style="flex: 1;">
-                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Specify</div>
-                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">Create or update spec.md file</div>
-                                        </div>
-                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /specify command" onclick="runSpecifyCommand()">/specify</button>
-                                    </div>
-
-                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-bottom: 1px solid #e2e8f0; background: white;">
-                                        <span style="font-size: 1.25rem;">📋</span>
-                                        <div style="flex: 1;">
-                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Plan</div>
-                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">plan.md</div>
-                                        </div>
-                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /plan command">/plan</button>
-                                    </div>
-
-                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-bottom: 1px solid #e2e8f0; background: white;">
-                                        <span style="font-size: 1.25rem;">✅</span>
-                                        <div style="flex: 1;">
-                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Tasks</div>
-                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">tasks.md</div>
-                                        </div>
-                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /tasks command">/tasks</button>
-                                    </div>
-
-                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: white;">
-                                        <span style="font-size: 1.25rem;">🏗️</span>
-                                        <div style="flex: 1;">
-                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Implement</div>
-                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">implement</div>
-                                        </div>
-                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /implement command">/implement</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Associated Repositories Accordion -->
                 <div class="accordion-item">
                     <button onclick="toggleAccordion('associated-repositories')" class="accordion-header">
-                        <span>Associated Repositories</span>
+                        <span>Context</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="associated-repositories-arrow">
                             <path d="M6 9l6 6 6-6"/>
                         </svg>
@@ -681,10 +682,10 @@
                 if (commandTasks) commandTasks.style.display = 'none';
                 if (commandImplement) commandImplement.style.display = 'none';
             } else if (workflowType === 'create-rfe') {
-                // RFE workflow - show ideate and specify
+                // RFE workflow - show ideate only
                 if (noWorkflowMessage) noWorkflowMessage.style.display = 'none';
                 if (commandIdeate) commandIdeate.style.display = 'flex';
-                if (commandSpecify) commandSpecify.style.display = 'flex';
+                if (commandSpecify) commandSpecify.style.display = 'none';
                 if (commandPlan) commandPlan.style.display = 'none';
                 if (commandTasks) commandTasks.style.display = 'none';
                 if (commandImplement) commandImplement.style.display = 'none';
@@ -973,12 +974,12 @@
             
             cardsContainer.innerHTML = `
                 <div style="flex: 1; background: white; border: 1px solid #e2e8f0; border-radius: 0.5rem; padding: 1rem; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='#1e40af'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.1)'" onmouseout="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none'" onclick="selectWorkflow('rfe')">
-                    <div style="font-weight: 500; color: #374151; margin-bottom: 0.25rem;"><span style="font-size: 1.25rem; margin-right: 0.5rem;">📝</span>Create RFE</div>
+                    <div style="font-weight: 500; color: #374151; margin-bottom: 0.25rem;"><span style="font-size: 1.25rem; margin-right: 0.5rem;">📝</span>Plan a feature</div>
                     <div style="font-size: 0.75rem; color: #64748b;">Ideate and specify your request for enhancement</div>
                 </div>
 
                 <div style="flex: 1; background: white; border: 1px solid #e2e8f0; border-radius: 0.5rem; padding: 1rem; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='#1e40af'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.1)'" onmouseout="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none'" onclick="selectWorkflow('feature')">
-                    <div style="font-weight: 500; color: #374151; margin-bottom: 0.25rem;"><span style="font-size: 1.25rem; margin-right: 0.5rem;">🏗️</span>Create Feature (Spec Kit)</div>
+                    <div style="font-weight: 500; color: #374151; margin-bottom: 0.25rem;"><span style="font-size: 1.25rem; margin-right: 0.5rem;">🏗️</span>Develop Feature</div>
                     <div style="font-size: 0.75rem; color: #64748b;">Complete feature development from spec to implementation</div>
                 </div>
             `;
@@ -1775,6 +1776,17 @@
         function runIdeateCommand() {
             const chatMessages = document.getElementById('chat-messages');
 
+            // Update the workflow step to show spinner and status
+            const workflowStepFilename = document.querySelector('#rfe-phases .workflow-step-filename');
+            if (workflowStepFilename) {
+                workflowStepFilename.innerHTML = `
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite; display: inline; vertical-align: middle; margin-right: 0.25rem;">
+                        <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                    </svg>
+                    creating RFE...
+                `;
+            }
+
             // Get selected agents
             const selectedAgents = [];
             const agentCheckboxes = document.querySelectorAll('#agents-list input[type="checkbox"]:not(#dynamic-agent-selection)');
@@ -1954,6 +1966,12 @@
             typeMessage(rfeContentElement, rfeContent, 5, function() {
                 // Scroll to bottom after typing completes
                 chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // Restore the workflow step description
+                const workflowStepFilename = document.querySelector('#rfe-phases .workflow-step-filename');
+                if (workflowStepFilename) {
+                    workflowStepFilename.innerHTML = 'Create or update rfe.md file';
+                }
 
                 // Show action buttons
                 const actionsDiv = document.getElementById('rfe-actions');

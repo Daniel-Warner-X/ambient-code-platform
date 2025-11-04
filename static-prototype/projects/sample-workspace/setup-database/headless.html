@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>optimize-queries - sample-project - Ambient Code Platform</title>
+    <title>setup-database - sample-workspace - Ambient Code Platform</title>
     <link rel="stylesheet" href="../../../styles.css">
     <style>
         .session-container {
@@ -42,8 +42,8 @@
             color: #10b981;
         }
         
-        .log-level-warning {
-            color: #f59e0b;
+        .log-level-error {
+            color: #ef4444;
         }
         
         .progress-bar {
@@ -68,10 +68,7 @@
             <div class="header-content">
                 <a href="../../../index.html" class="logo">Ambient Code Platform</a>
                 <div style="display: flex; align-items: center; gap: 2rem;">
-                    <nav class="nav">
-                        <a href="../../../index.html">Projects</a>
-                        <a href="../../../integrations/page.html">Integrations</a>
-                    </nav>
+                    
                     <div class="user-dropdown" style="position: relative;">
                         <button onclick="toggleUserDropdown()" class="user-dropdown-trigger" style="display: flex; align-items: center; gap: 0.5rem; color: #64748b; font-size: 0.875rem; background: none; border: none; cursor: pointer; padding: 0.5rem; border-radius: 0.375rem; transition: background-color 0.2s;">
                             <div style="width: 24px; height: 24px; background: #64748b; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 500; font-size: 0.75rem;">
@@ -88,6 +85,15 @@
                                 <div style="color: #64748b; font-size: 0.75rem;">Demo User</div>
                             </div>
                             <div style="padding: 0.25rem;">
+                                <a href="../../../integrations/page.html" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; background: none; border: none; cursor: pointer; border-radius: 0.25rem; color: #374151; font-size: 0.875rem; transition: background-color 0.2s; display: block; text-decoration: none;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; margin-right: 0.5rem; vertical-align: middle;">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                        <path d="M2 17l10 5 10-5"/>
+                                        <path d="M2 12l10 5 10-5"/>
+                                    </svg>
+                                    Integrations
+                                </a>
+                                <hr style="margin: 0.25rem 0; border: none; border-top: 1px solid #e2e8f0;">
                                 <button onclick="logout()" style="width: 100%; text-align: left; padding: 0.5rem 0.75rem; background: none; border: none; cursor: pointer; border-radius: 0.25rem; color: #374151; font-size: 0.875rem; transition: background-color 0.2s;">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; margin-right: 0.5rem;">
                                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
@@ -107,15 +113,15 @@
     <div class="page-header">
         <div class="container">
             <div class="breadcrumbs">
-                <a href="../../../index.html">Projects</a>
+                <a href="../../../index.html">Workspaces</a>
                 <span>/</span>
-                <a href="../page.html">sample-project</a>
+                <a href="../page.html">sample-workspace</a>
                 <span>/</span>
-                <span>optimize-queries</span>
+                <span>setup-database</span>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div style="display: flex; align-items: center; gap: 1rem;">
-                    <h1 class="page-title">Headless Session: optimize-queries</h1>
+                    <h1 class="page-title">Headless Session: setup-database</h1>
                     <span class="badge badge-success" style="white-space: nowrap;">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.25rem;">
                             <path d="M20 6L9 17l-5-5"/>
@@ -141,7 +147,7 @@
                     </button>
                 </div>
             </div>
-            <p class="page-description">Optimize database queries for better performance • claude-3.5-sonnet • Completed 2 hours ago</p>
+            <p class="page-description">Initialize PostgreSQL database with user tables • claude-3.5-sonnet • Completed 1 day ago</p>
         </div>
     </div>
 
@@ -154,7 +160,7 @@
                 </div>
                 <div class="card-content">
                     <div style="margin-bottom: 0.75rem;">
-                        <strong>Task:</strong> Optimize database queries for better performance
+                        <strong>Task:</strong> Initialize PostgreSQL database with user tables
                     </div>
                     <div style="margin-bottom: 0.75rem;">
                         <strong>Model:</strong> claude-3.5-sonnet
@@ -163,7 +169,7 @@
                         <strong>Mode:</strong> Headless
                     </div>
                     <div style="margin-bottom: 0.75rem;">
-                        <strong>Duration:</strong> 18 minutes
+                        <strong>Duration:</strong> 12 minutes
                     </div>
                     <div>
                         <strong>Status:</strong> 
@@ -179,12 +185,12 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Performance Results</h3>
+                    <h3 class="card-title">Results Summary</h3>
                 </div>
                 <div class="card-content">
                     <div style="margin-bottom: 1rem;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span>Query Optimization</span>
+                            <span>Overall Progress</span>
                             <span style="font-weight: 500; color: #10b981;">100%</span>
                         </div>
                         <div class="progress-bar">
@@ -192,11 +198,11 @@
                         </div>
                     </div>
                     <div style="font-size: 0.875rem; color: #64748b;">
-                        <div style="margin-bottom: 0.25rem;">✓ Analyzed slow queries</div>
-                        <div style="margin-bottom: 0.25rem;">✓ Added database indexes</div>
-                        <div style="margin-bottom: 0.25rem;">✓ Optimized JOIN operations</div>
-                        <div style="margin-bottom: 0.25rem;">✓ Reduced query time by 75%</div>
-                        <div>✓ Updated documentation</div>
+                        <div style="margin-bottom: 0.25rem;">✓ Database schema created</div>
+                        <div style="margin-bottom: 0.25rem;">✓ User table with constraints</div>
+                        <div style="margin-bottom: 0.25rem;">✓ Password hashing implemented</div>
+                        <div style="margin-bottom: 0.25rem;">✓ Migration scripts generated</div>
+                        <div>✓ Initial data seeded</div>
                     </div>
                 </div>
             </div>
@@ -219,40 +225,44 @@
             <div class="card-content" style="padding: 0;">
                 <div class="log-container">
                     <div class="log-line">
-                        <span class="log-timestamp">14:15:30</span>
-                        <span class="log-level-info">[INFO]</span> Session started: Optimize database queries for better performance
+                        <span class="log-timestamp">12:30:15</span>
+                        <span class="log-level-info">[INFO]</span> Session started: Initialize PostgreSQL database with user tables
                     </div>
                     <div class="log-line">
-                        <span class="log-timestamp">14:15:32</span>
-                        <span class="log-level-info">[INFO]</span> Analyzing database query performance
+                        <span class="log-timestamp">12:30:16</span>
+                        <span class="log-level-info">[INFO]</span> Analyzing existing database structure
                     </div>
                     <div class="log-line">
-                        <span class="log-timestamp">14:16:15</span>
-                        <span class="log-level-warning">[WARNING]</span> Found 5 slow queries without proper indexing
+                        <span class="log-timestamp">12:30:22</span>
+                        <span class="log-level-info">[INFO]</span> Creating users table schema
                     </div>
                     <div class="log-line">
-                        <span class="log-timestamp">14:16:45</span>
-                        <span class="log-level-info">[INFO]</span> Creating optimized database indexes
+                        <span class="log-timestamp">12:31:05</span>
+                        <span class="log-level-success">[SUCCESS]</span> Users table created with proper constraints
                     </div>
                     <div class="log-line">
-                        <span class="log-timestamp">14:18:22</span>
-                        <span class="log-level-success">[SUCCESS]</span> Database indexes created successfully
+                        <span class="log-timestamp">12:31:08</span>
+                        <span class="log-level-info">[INFO]</span> Adding password hashing utilities
                     </div>
                     <div class="log-line">
-                        <span class="log-timestamp">14:19:10</span>
-                        <span class="log-level-info">[INFO]</span> Optimizing JOIN operations and subqueries
+                        <span class="log-timestamp">12:31:45</span>
+                        <span class="log-level-success">[SUCCESS]</span> Password hashing implemented with bcrypt
                     </div>
                     <div class="log-line">
-                        <span class="log-timestamp">14:21:35</span>
-                        <span class="log-level-success">[SUCCESS]</span> Query performance improved by 75%
+                        <span class="log-timestamp">12:32:12</span>
+                        <span class="log-level-info">[INFO]</span> Creating database migration scripts
                     </div>
                     <div class="log-line">
-                        <span class="log-timestamp">14:22:15</span>
-                        <span class="log-level-info">[INFO]</span> Updating query documentation
+                        <span class="log-timestamp">12:33:01</span>
+                        <span class="log-level-success">[SUCCESS]</span> Migration scripts generated
                     </div>
                     <div class="log-line">
-                        <span class="log-timestamp">14:23:48</span>
-                        <span class="log-level-success">[SUCCESS]</span> Database optimization completed successfully
+                        <span class="log-timestamp">12:33:15</span>
+                        <span class="log-level-info">[INFO]</span> Seeding initial user data
+                    </div>
+                    <div class="log-line">
+                        <span class="log-timestamp">12:33:28</span>
+                        <span class="log-level-success">[SUCCESS]</span> Database initialization completed successfully
                     </div>
                 </div>
             </div>
