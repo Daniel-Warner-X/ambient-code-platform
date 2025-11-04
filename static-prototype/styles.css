@@ -525,3 +525,129 @@ select {
   border-top: 1px solid #e2e8f0;
   overflow: hidden;
 }
+
+/* Updated styles for prototype improvements */
+
+/* Info icons and tooltips */
+.info-icon {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.25rem;
+}
+
+.info-icon:hover {
+  color: #374151;
+}
+
+.tooltip {
+  position: absolute;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  z-index: 1000;
+}
+
+/* Agent selection improvements */
+.agent-selection-info {
+  margin: 1rem 0;
+}
+
+.auto-select-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 0.375rem;
+  color: #166534;
+  font-size: 0.875rem;
+}
+
+.check-icon {
+  width: 16px;
+  height: 16px;
+  color: #16a34a;
+}
+
+/* Workflow step states */
+.step-item.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.step-item.locked button {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Status message states */
+.step-description[data-status="running"] {
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+.step-description[data-status="completed"] {
+  color: #10b981;
+}
+
+/* Spinner animation */
+.spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #3b82f6;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Artifact status badges */
+.artifact-status {
+  margin-top: 0.5rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+}
+
+.badge-success {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.badge-warning {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badge-info {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+/* Timestamp styling */
+.timestamp {
+  color: #6b7280;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+/* User dropdown improvements for integrations */
+.user-dropdown-menu a:hover {
+  background: #f1f5f9;
+}
