@@ -83,8 +83,8 @@ export default function ProjectsPage() {
       <div className="sticky top-0 z-20 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
         <div className="px-6 py-4">
           <PageHeader
-            title="Projects"
-            description="Manage your Ambient AI projects and configurations"
+            title="Workspaces"
+            description="Manage your Ambient AI workspaces"
             actions={
               <>
                 <Button

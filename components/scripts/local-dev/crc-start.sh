@@ -277,7 +277,18 @@ apply_rbac() {
   
   # Wait for token secret to be populated
   log "Waiting for frontend auth token to be created..."
-  oc wait --for=condition=complete secret/frontend-auth-token --timeout=60s -n "$PROJECT_NAME" || true
+  # Wait for the secret to have the token data populated by checking if the token key exists
+  local max_wait=60
+  local count=0
+  while [ $count -lt $max_wait ]; do
+    if oc get secret frontend-auth-token -n "$PROJECT_NAME" -o jsonpath='{.data.token}' 2>/dev/null | grep -q .; then
+      log "Frontend auth token successfully created"
+      return 0
+    fi
+    count=$((count + 1))
+    sleep 1
+  done
+  warn "Frontend auth token not populated after ${max_wait}s, but continuing..."
 }
 
 apply_operator_rbac() {
