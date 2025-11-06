@@ -255,12 +255,21 @@
 
                                 <div style="font-size: 0.875rem; border: 1px solid #e2e8f0; border-radius: 0.375rem; overflow: hidden;">
                                     <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-bottom: 1px solid #e2e8f0; background: white;">
-                                        <span style="font-size: 1.25rem;">💡</span>
+                                        <span style="font-size: 1.25rem;">🔍</span>
                                         <div style="flex: 1;">
-                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Ideate</div>
-                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">Create or update idea.md file</div>
+                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Analyze</div>
+                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">Analyze existing specifications</div>
                                         </div>
-                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /ideate command" onclick="runIdeateCommand()">/ideate</button>
+                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /analyze command" onclick="runAnalyzeCommand()">/analyze</button>
+                                    </div>
+
+                                    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-bottom: 1px solid #e2e8f0; background: white;">
+                                        <span style="font-size: 1.25rem;">❓</span>
+                                        <div style="flex: 1;">
+                                            <div class="workflow-step-name" style="font-weight: 500; color: #9ca3af;">Clarify</div>
+                                            <div class="workflow-step-filename" style="font-size: 0.75rem; color: #cbd5e1;">Clarify underspecified areas</div>
+                                        </div>
+                                        <button class="btn btn-secondary workflow-step-button" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled title="Run the /clarify command" onclick="runClarifyCommand()">/clarify</button>
                                     </div>
 
                                     <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-bottom: 1px solid #e2e8f0; background: white;">
@@ -379,7 +388,7 @@
                             <!-- Dynamic selection option -->
                             <div style="margin-bottom: 0.75rem; padding: 0.5rem; background: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 0.375rem;">
                                 <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.8125rem;">
-                                    <input type="checkbox" id="dynamic-agent-selection" style="cursor: pointer;">
+                                    <input type="checkbox" id="dynamic-agent-selection" style="cursor: pointer;" checked>
                                     <span style="color: #374151;"><strong>Let ACP dynamically select agents</strong></span>
                                 </label>
                             </div>
@@ -569,13 +578,37 @@
                             <div id="no-workflow-message" style="padding: 1rem; text-align: center; color: #64748b; font-size: 0.875rem;">
                                 No workflow-specific commands available
                             </div>
-                            <div id="command-ideate" onclick="selectCommand('ideate')" style="display: none; padding: 0.75rem; cursor: pointer; transition: background-color 0.2s; align-items: center; gap: 0.75rem;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+                            <div id="command-ideate" onclick="selectCommand('ideate')" style="display: none; padding: 0.75rem; cursor: pointer; transition: background-color 0.2s; align-items: center; gap: 0.75rem; border-bottom: 1px solid #e2e8f0;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
                                 <div>
                                     <div style="font-weight: 500; font-size: 0.875rem; color: #374151;">/ideate</div>
-                                    <div style="font-size: 0.75rem; color: #64748b;">Start ideation phase</div>
+                                    <div style="font-size: 0.75rem; color: #64748b;">Iterate your idea</div>
                                 </div>
                             </div>
-                            <div id="command-specify" onclick="selectCommand('specify')" style="display: none; padding: 0.75rem; cursor: pointer; transition: background-color 0.2s; align-items: center; gap: 0.75rem;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+                            <div id="command-feasibility" onclick="selectCommand('feasibility')" style="display: none; padding: 0.75rem; cursor: pointer; transition: background-color 0.2s; align-items: center; gap: 0.75rem; border-bottom: 1px solid #e2e8f0;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+                                <div>
+                                    <div style="font-weight: 500; font-size: 0.875rem; color: #374151;">/feasibility</div>
+                                    <div style="font-size: 0.75rem; color: #64748b;">Assess technical feasibility</div>
+                                </div>
+                            </div>
+                            <div id="command-describe" onclick="selectCommand('describe')" style="display: none; padding: 0.75rem; cursor: pointer; transition: background-color 0.2s; align-items: center; gap: 0.75rem; border-bottom: 1px solid #e2e8f0;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+                                <div>
+                                    <div style="font-weight: 500; font-size: 0.875rem; color: #374151;">/describe</div>
+                                    <div style="font-size: 0.75rem; color: #64748b;">Create detailed specification</div>
+                                </div>
+                            </div>
+                            <div id="command-analyze" onclick="selectCommand('analyze')" style="display: none; padding: 0.75rem; cursor: pointer; transition: background-color 0.2s; align-items: center; gap: 0.75rem; border-bottom: 1px solid #e2e8f0;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+                                <div>
+                                    <div style="font-weight: 500; font-size: 0.875rem; color: #374151;">/analyze</div>
+                                    <div style="font-size: 0.75rem; color: #64748b;">Analyze existing specifications</div>
+                                </div>
+                            </div>
+                            <div id="command-clarify" onclick="selectCommand('clarify')" style="display: none; padding: 0.75rem; cursor: pointer; transition: background-color 0.2s; align-items: center; gap: 0.75rem; border-bottom: 1px solid #e2e8f0;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+                                <div>
+                                    <div style="font-weight: 500; font-size: 0.875rem; color: #374151;">/clarify</div>
+                                    <div style="font-size: 0.75rem; color: #64748b;">Clarify underspecified areas</div>
+                                </div>
+                            </div>
+                            <div id="command-specify" onclick="selectCommand('specify')" style="display: none; padding: 0.75rem; cursor: pointer; transition: background-color 0.2s; align-items: center; gap: 0.75rem; border-bottom: 1px solid #e2e8f0;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
                                 <div>
                                     <div style="font-weight: 500; font-size: 0.875rem; color: #374151;">/specify</div>
                                     <div style="font-size: 0.75rem; color: #64748b;">Create specifications</div>
@@ -612,7 +645,17 @@
                         </div>
                     </div>
 
-                    <input type="text" id="chat-input-field" placeholder="/ for commands, # for agents" style="flex: 1;" oninput="handleChatInput(event)" onkeypress="handleKeyPress(event)">
+                    <!-- Context Popover -->
+                    <div id="context-popover" style="display: none; position: absolute; bottom: 100%; left: 0; background: white; border: 1px solid #e2e8f0; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); min-width: 300px; max-height: 400px; margin-bottom: 0.5rem; overflow: hidden;">
+                        <div style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
+                            <div style="font-size: 0.75rem; font-weight: 500; color: #64748b;">CONTEXT FILES</div>
+                        </div>
+                        <div id="context-popover-content" style="overflow-y: auto; max-height: 350px;">
+                            <!-- Content will be dynamically populated -->
+                        </div>
+                    </div>
+
+                    <input type="text" id="chat-input-field" placeholder="/ for commands, # for agents, @ for context" style="flex: 1;" oninput="handleChatInput(event)" onkeypress="handleKeyPress(event)">
                     <button class="btn btn-primary" onclick="sendMessage()">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M22 2L11 13"/>
@@ -686,6 +729,10 @@
 
             var noWorkflowMessage = document.getElementById('no-workflow-message');
             var commandIdeate = document.getElementById('command-ideate');
+            var commandFeasibility = document.getElementById('command-feasibility');
+            var commandDescribe = document.getElementById('command-describe');
+            var commandAnalyze = document.getElementById('command-analyze');
+            var commandClarify = document.getElementById('command-clarify');
             var commandSpecify = document.getElementById('command-specify');
             var commandPlan = document.getElementById('command-plan');
             var commandTasks = document.getElementById('command-tasks');
@@ -702,6 +749,10 @@
                     noWorkflowMessage.textContent = 'Add a spec repository to enable workflow commands';
                 }
                 if (commandIdeate) commandIdeate.style.display = 'none';
+                if (commandFeasibility) commandFeasibility.style.display = 'none';
+                if (commandDescribe) commandDescribe.style.display = 'none';
+                if (commandAnalyze) commandAnalyze.style.display = 'none';
+                if (commandClarify) commandClarify.style.display = 'none';
                 if (commandSpecify) commandSpecify.style.display = 'none';
                 if (commandPlan) commandPlan.style.display = 'none';
                 if (commandTasks) commandTasks.style.display = 'none';
@@ -716,22 +767,34 @@
                     noWorkflowMessage.textContent = 'No workflow-specific commands available';
                 }
                 if (commandIdeate) commandIdeate.style.display = 'none';
+                if (commandFeasibility) commandFeasibility.style.display = 'none';
+                if (commandDescribe) commandDescribe.style.display = 'none';
+                if (commandAnalyze) commandAnalyze.style.display = 'none';
+                if (commandClarify) commandClarify.style.display = 'none';
                 if (commandSpecify) commandSpecify.style.display = 'none';
                 if (commandPlan) commandPlan.style.display = 'none';
                 if (commandTasks) commandTasks.style.display = 'none';
                 if (commandImplement) commandImplement.style.display = 'none';
             } else if (workflowType === 'create-rfe') {
-                // RFE workflow - show ideate only
+                // Plan a Feature workflow - show ideate, feasibility, describe
                 if (noWorkflowMessage) noWorkflowMessage.style.display = 'none';
                 if (commandIdeate) commandIdeate.style.display = 'flex';
+                if (commandFeasibility) commandFeasibility.style.display = 'flex';
+                if (commandDescribe) commandDescribe.style.display = 'flex';
+                if (commandAnalyze) commandAnalyze.style.display = 'none';
+                if (commandClarify) commandClarify.style.display = 'none';
                 if (commandSpecify) commandSpecify.style.display = 'none';
                 if (commandPlan) commandPlan.style.display = 'none';
                 if (commandTasks) commandTasks.style.display = 'none';
                 if (commandImplement) commandImplement.style.display = 'none';
             } else if (workflowType === 'create-feature') {
-                // Spec Kit workflow - show all commands
+                // Develop Feature workflow - show analyze, clarify, specify, plan, tasks, implement
                 if (noWorkflowMessage) noWorkflowMessage.style.display = 'none';
-                if (commandIdeate) commandIdeate.style.display = 'flex';
+                if (commandIdeate) commandIdeate.style.display = 'none';
+                if (commandFeasibility) commandFeasibility.style.display = 'none';
+                if (commandDescribe) commandDescribe.style.display = 'none';
+                if (commandAnalyze) commandAnalyze.style.display = 'flex';
+                if (commandClarify) commandClarify.style.display = 'flex';
                 if (commandSpecify) commandSpecify.style.display = 'flex';
                 if (commandPlan) commandPlan.style.display = 'flex';
                 if (commandTasks) commandTasks.style.display = 'flex';
@@ -1014,7 +1077,7 @@
             cardsContainer.innerHTML = `
                 <div style="flex: 1; background: white; border: 1px solid #e2e8f0; border-radius: 0.5rem; padding: 1rem; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='#1e40af'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.1)'" onmouseout="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none'" onclick="selectWorkflow('rfe')">
                     <div style="font-weight: 500; color: #374151; margin-bottom: 0.25rem;"><span style="font-size: 1.25rem; margin-right: 0.5rem;">📝</span>Plan a feature</div>
-                    <div style="font-size: 0.75rem; color: #64748b;">Ideate and specify your request for enhancement</div>
+                    <div style="font-size: 0.75rem; color: #64748b;">Create a detailed request for enhancement</div>
                 </div>
 
                 <div style="flex: 1; background: white; border: 1px solid #e2e8f0; border-radius: 0.5rem; padding: 1rem; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='#1e40af'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.1)'" onmouseout="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none'" onclick="selectWorkflow('feature')">
@@ -1064,7 +1127,7 @@
                     const systemMessage = document.createElement('div');
                     systemMessage.style.cssText = 'text-align: center; padding: 0.5rem; margin: 1rem 0;';
                     
-                    const workflowName = workflowType === 'rfe' ? 'Create RFE workflow' : 'Create feature with spec-kit workflow';
+                    const workflowName = workflowType === 'rfe' ? 'Feature planning workflow' : 'Create feature with spec-kit workflow';
                     systemMessage.innerHTML = `
                         <div style="display: inline-block; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 1rem; padding: 0.375rem 0.75rem; font-size: 0.75rem; color: #64748b;">
                             ${workflowName} selected
@@ -1486,6 +1549,38 @@
                 // Hide repository requirement messages in workflows
                 const rfeRepoRequirement = document.getElementById('rfe-repo-requirement');
                 const specKitRepoRequirement = document.getElementById('spec-kit-repo-requirement');
+
+                // Add helpful ACP message based on selected workflow
+                setTimeout(function() {
+                    const workflowType = selectedWorkflow;
+                    let workflowMessage = '';
+
+                    if (workflowType === 'create-rfe') {
+                        workflowMessage = 'Great! Your spec repository is ready. You can now start planning your feature using the Plan a feature workflow. Try using /ideate to begin iterating on your idea, then move through /feasibility and /describe to create a comprehensive RFE.';
+                    } else if (workflowType === 'create-feature') {
+                        workflowMessage = 'Perfect! Your spec repository is set up. You\'re ready to start the Develop Feature workflow. Begin with /analyze to review existing specifications, use /clarify to identify areas needing more detail, then proceed through /specify, /plan, /tasks, and /implement.';
+                    } else {
+                        workflowMessage = 'Your spec repository is ready! Select a workflow from the dropdown above to get started with AI-assisted feature development.';
+                    }
+
+                    const helpfulMessage = document.createElement('div');
+                    helpfulMessage.className = 'message';
+                    helpfulMessage.innerHTML =
+                        '<div class="message-avatar ai-avatar">AC</div>' +
+                        '<div class="message-content">' +
+                            '<div class="message-header">Ambient Code Platform</div>' +
+                            '<div id="workflow-help-content"></div>' +
+                        '</div>';
+
+                    chatMessages.appendChild(helpfulMessage);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    updateMessageCount();
+
+                    // Type out the message
+                    typeMessage(document.getElementById('workflow-help-content'), workflowMessage, 15, function() {
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    });
+                }, 800);
                 if (rfeRepoRequirement) {
                     rfeRepoRequirement.style.display = 'none';
                 }
@@ -1689,9 +1784,9 @@
                 var availableCommands = ['help']; // help is always available
 
                 if (selectedWorkflow === 'create-rfe') {
-                    availableCommands.push('ideate', 'specify');
+                    availableCommands.push('ideate', 'feasibility', 'describe');
                 } else if (selectedWorkflow === 'create-feature') {
-                    availableCommands.push('ideate', 'specify', 'plan', 'tasks', 'implement');
+                    availableCommands.push('analyze', 'clarify', 'specify', 'plan', 'tasks', 'implement');
                 }
 
                 // Filter and show matching commands
@@ -1735,6 +1830,80 @@
             } else {
                 commandPopover.style.display = 'none';
             }
+
+            // Show context popover when @ is typed
+            const contextPopover = document.getElementById('context-popover');
+            if (value === '@' || value.startsWith('@')) {
+                commandPopover.style.display = 'none';
+                agentPopover.style.display = 'none';
+
+                var contextPopoverContent = document.getElementById('context-popover-content');
+
+                // Check if spec repo has been added
+                var repoDetails = document.getElementById('repository-details');
+                var hasSpecRepo = repoDetails && repoDetails.style.display !== 'none';
+
+                if (!hasSpecRepo) {
+                    // Show message that spec repo needs to be added
+                    contextPopoverContent.innerHTML =
+                        '<div style="padding: 1rem; text-align: center; color: #64748b; font-size: 0.875rem;">' +
+                            'Add a spec repo to add files to the workspace.' +
+                        '</div>';
+                } else {
+                    // Get all files from the spec repo file list
+                    var fileListContainer = document.querySelector('#repository-details div[style*="background: #f8fafc"]');
+                    var files = [];
+
+                    if (fileListContainer) {
+                        var fileEntries = fileListContainer.querySelectorAll('div[style*="display: flex"]');
+                        fileEntries.forEach(function(entry) {
+                            var filenameElement = entry.querySelector('span');
+                            if (filenameElement) {
+                                var filename = filenameElement.textContent.trim();
+                                // Only add markdown and text files
+                                if (filename.endsWith('.md') || filename.endsWith('.txt')) {
+                                    files.push(filename);
+                                }
+                            }
+                        });
+                    }
+
+                    var searchText = value.substring(1).toLowerCase();
+                    var fileHtml = '';
+
+                    if (files.length === 0) {
+                        fileHtml = '<div style="padding: 1rem; text-align: center; color: #64748b; font-size: 0.875rem;">No files available for context</div>';
+                    } else {
+                        for (var i = 0; i < files.length; i++) {
+                            var filename = files[i];
+                            var filenameLower = filename.toLowerCase();
+
+                            // Filter files based on search text
+                            if (searchText === '' || filenameLower.indexOf(searchText) === 0) {
+                                fileHtml +=
+                                    '<div onclick="selectContext(\'' + filename + '\')" style="padding: 0.75rem; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; gap: 0.75rem; border-bottom: 1px solid #e2e8f0;" onmouseover="this.style.background=\'#f8fafc\'" onmouseout="this.style.background=\'white\'">' +
+                                        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">' +
+                                            '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>' +
+                                            '<polyline points="14 2 14 8 20 8"/>' +
+                                        '</svg>' +
+                                        '<div style="font-weight: 500; font-size: 0.875rem; color: #374151;">' + filename + '</div>' +
+                                    '</div>';
+                            }
+                        }
+
+                        if (fileHtml === '') {
+                            fileHtml = '<div style="padding: 1rem; text-align: center; color: #64748b; font-size: 0.875rem;">No files found</div>';
+                        }
+                    }
+
+                    contextPopoverContent.innerHTML = fileHtml;
+                }
+
+                contextPopover.style.display = 'block';
+                return;
+            } else {
+                contextPopover.style.display = 'none';
+            }
         }
 
         // Select a command from the popover
@@ -1763,10 +1932,24 @@
             input.focus();
         }
 
+        // Select a context file from the popover
+        function selectContext(filename) {
+            const input = document.getElementById('chat-input-field');
+            const contextPopover = document.getElementById('context-popover');
+
+            // Set the input value to the filename
+            input.value = '@' + filename + ' ';
+            contextPopover.style.display = 'none';
+
+            // Focus back on input
+            input.focus();
+        }
+
         // Close popovers when clicking outside
         document.addEventListener('click', function(event) {
             const commandPopover = document.getElementById('command-popover');
             const agentPopover = document.getElementById('agent-popover');
+            const contextPopover = document.getElementById('context-popover');
             const chatInput = document.getElementById('chat-input-field');
 
             // Don't close if clicking on the input field itself
@@ -1782,6 +1965,11 @@
             if (agentPopover && chatInput &&
                 !agentPopover.contains(event.target)) {
                 agentPopover.style.display = 'none';
+            }
+
+            if (contextPopover && chatInput &&
+                !contextPopover.contains(event.target)) {
+                contextPopover.style.display = 'none';
             }
         });
 
@@ -1944,11 +2132,20 @@
             const rfeMessage = document.createElement('div');
             rfeMessage.className = 'message';
             rfeMessage.innerHTML =
-                '<div class="message-avatar ai-avatar">ACP</div>' +
+                '<div class="message-avatar ai-avatar">AC</div>' +
                 '<div class="message-content">' +
-                    '<div class="message-header">ACP</div>' +
-                    '<div id="rfe-content" style="white-space: pre-wrap; font-family: monospace; font-size: 0.875rem;"></div>' +
-                    '<div id="rfe-actions" style="display: none; margin-top: 1rem; display: flex; gap: 0.5rem;"></div>' +
+                    '<div class="message-header">Ambient Code Platform</div>' +
+                    '<div style="margin-top: 0.5rem;">' +
+                        '<div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; padding: 0.5rem; background: #f8fafc; border-radius: 0.375rem;">' +
+                            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">' +
+                                '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>' +
+                                '<polyline points="14 2 14 8 20 8"/>' +
+                            '</svg>' +
+                            '<strong>idea.md</strong>' +
+                        '</div>' +
+                        '<div id="rfe-content" style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; font-family: monospace; font-size: 0.875rem; white-space: pre-wrap; max-height: 400px; overflow-y: auto;"></div>' +
+                    '</div>' +
+                    '<div id="rfe-actions" style="margin-top: 1rem; display: flex; gap: 0.5rem;"></div>' +
                 '</div>';
 
             chatMessages.appendChild(rfeMessage);
@@ -1957,61 +2154,45 @@
             // Update message count
             updateMessageCount();
 
-            // Type out the RFE content
+            // Type out the idea content
             const rfeContentElement = document.getElementById('rfe-content');
-            var rfeContent = '# RFE: Visual Redesign of Red Hat OpenShift AI (RHOAI) 3.0 Dashboard\n\n' +
-'## Executive Summary\n\n' +
-'This Request for Enhancement (RFE) proposes three distinct visual redesign directions for the Red Hat OpenShift AI (RHOAI) 3.0 dashboard to address the core challenge faced by AI Platform Engineers like Paula: efficiently finding and evaluating production-ready AI models among thousands of options.\n\n' +
-'The current dashboard, while functional, presents a traditional enterprise interface that does not leverage modern AI-centric design patterns or optimize for the unique workflows of AI practitioners. This redesign focuses on transforming the user experience from a data-heavy administrative interface to an intelligent, task-oriented platform that accelerates model discovery and deployment decisions.\n\n' +
-'## Current State Analysis\n\n' +
-'### Existing Architecture\n' +
-'- Framework: React with TypeScript, PatternFly React components\n' +
-'- Navigation: Traditional sidebar navigation with hierarchical structure\n' +
-'- Layout: Standard enterprise dashboard with card-based model catalog\n' +
-'- Feature Management: Comprehensive feature flag system supporting MVP mode vs full feature set\n' +
-'- Components: Heavy use of PatternFly components (Cards, Tables, Forms, Modals, Dropdowns)\n\n' +
-'### Current User Journey Pain Points\n' +
-'1. Cognitive Overload: Thousands of models presented in basic card/table format\n' +
-'2. Inefficient Filtering: Multiple separate filter interfaces without visual feedback\n' +
-'3. Limited Comparison: No side-by-side model comparison capabilities\n' +
-'4. Static Information: Performance metrics buried in text rather than visual indicators\n' +
-'5. Context Switching: Frequent navigation between catalog, registry, and deployment sections\n\n' +
-'### Technical Foundation\n' +
-'- PatternFly Integration: Extensive use of existing components provides solid accessibility foundation\n' +
-'- Feature Flags: Robust system for MVP/full feature mode switching\n' +
-'- State Management: Context API for global state, component-level state for UI interactions\n' +
-'- Routing: React Router with dynamic route generation based on feature flags\n\n' +
-'## User Persona: Paula - AI Platform Engineer\n\n' +
-'Primary Goal: Find production-ready AI models that balance performance, cost, and specific use case requirements\n\n' +
-'Key Workflows:\n' +
-'1. Model Discovery: Search through thousands of models using multiple criteria\n' +
-'2. Performance Evaluation: Compare latency, throughput, accuracy, and resource requirements\n' +
-'3. Compatibility Assessment: Verify model compatibility with existing infrastructure\n' +
-'4. Deployment Planning: Understand deployment requirements and costs\n' +
-'5. Monitoring Setup: Configure monitoring and alerting for deployed models\n\n' +
-'Success Metrics:\n' +
-'- Time to find relevant models reduced by 60%\n' +
-'- Improved task completion rates for model selection workflows\n' +
-'- Reduced cognitive load when comparing multiple models\n' +
-'- Increased user satisfaction with filtering and search capabilities\n\n' +
-'---\n\n' +
-'# Design Direction 1: AI-First Visual Intelligence\n\n' +
-'## Philosophy\n' +
-'Treat AI models as visual, interactive objects rather than data rows. Transform the dashboard into an intelligent visual workspace where data visualization, interactive filtering, and AI-powered recommendations create an intuitive model discovery experience.\n\n' +
-'## User Journey: Paula Model Discovery Workflow\n\n' +
-'### 1. Landing Experience\n' +
-'Paula arrives at a Visual Model Universe - a dynamic, interactive visualization showing all available models as nodes in a network graph, clustered by use case, provider, and performance characteristics.\n\n' +
-'### 2. Intelligent Filtering\n' +
-'She uses Visual Filter Sliders to narrow down options:\n' +
-'- Latency requirement: Drag slider to <100ms\n' +
-'- Cost threshold: Visual budget indicator shows real-time cost implications\n' +
-'- Hardware compatibility: Interactive hardware requirement visualization\n\n' +
-'### 3. AI-Powered Recommendations\n' +
-'The Recommendation Engine surfaces relevant models based on her query with confidence scores and reasoning.\n\n' +
-'### 4. Visual Comparison\n' +
-'Paula selects 3-4 models for Side-by-Side Visual Comparison with interactive performance charts, compatibility matrices, and deployment requirement visualizations.\n\n' +
-'### 5. Workflow Integration\n' +
-'She connects her selected model to MCP servers and agents using the Visual Workflow Builder - a drag-and-drop interface showing data flow and dependencies.';
+            var rfeContent = '# Idea: Enhanced Model Discovery for AI Platform Engineers\n\n' +
+'## Overview\n\n' +
+'AI Platform Engineers like Paula struggle to efficiently find and evaluate production-ready AI models from thousands of options. The current dashboard presents models in a traditional format that doesn\'t optimize for AI-centric workflows.\n\n' +
+'This idea proposes reimagining the model discovery experience to make it more visual, intelligent, and task-oriented.\n\n' +
+'## The Problem\n\n' +
+'Paula, an AI Platform Engineer, needs to:\n' +
+'- Search through thousands of AI models quickly\n' +
+'- Compare performance metrics (latency, throughput, accuracy)\n' +
+'- Understand compatibility with existing infrastructure\n' +
+'- Evaluate deployment costs and requirements\n\n' +
+'Current challenges:\n' +
+'- **Information overload**: Too many models without effective filtering\n' +
+'- **Limited comparison**: No easy way to compare models side-by-side\n' +
+'- **Hidden insights**: Performance data buried in text rather than visualized\n' +
+'- **Fragmented workflow**: Constant switching between catalog, registry, and deployment views\n\n' +
+'## The Opportunity\n\n' +
+'Transform the dashboard from a traditional enterprise interface into an intelligent visual workspace that:\n\n' +
+'1. **Visualizes the model landscape** - Show models as an interactive visual map, clustered by use case, provider, and performance\n\n' +
+'2. **Makes filtering intuitive** - Replace checkboxes with visual sliders and real-time feedback showing how filters affect the available options\n\n' +
+'3. **Enables smart recommendations** - Use AI to suggest models based on requirements, with confidence scores and reasoning\n\n' +
+'4. **Simplifies comparison** - Allow side-by-side comparison with interactive charts and compatibility matrices\n\n' +
+'5. **Integrates workflows** - Provide drag-and-drop connections to MCP servers and agents\n\n' +
+'## Success Would Look Like\n\n' +
+'- Paula finds relevant models 60% faster\n' +
+'- Reduced cognitive load when evaluating options\n' +
+'- Higher confidence in deployment decisions\n' +
+'- Improved satisfaction with the discovery process\n\n' +
+'## Key Questions to Explore\n\n' +
+'- What\'s the right balance between visual richness and performance with thousands of models?\n' +
+'- How can we make AI recommendations transparent and trustworthy?\n' +
+'- What level of customization do users need for their workflows?\n' +
+'- How do we maintain accessibility while adding visual features?\n\n' +
+'## Next Steps\n\n' +
+'1. Validate the problem with user research\n' +
+'2. Assess technical feasibility of visualization approaches\n' +
+'3. Prototype key interaction patterns\n' +
+'4. Define success metrics and measurement strategy';
 
             typeMessage(rfeContentElement, rfeContent, 5, function() {
                 // Scroll to bottom after typing completes
@@ -2028,15 +2209,39 @@
                 if (actionsDiv) {
                     actionsDiv.style.display = 'flex';
                     actionsDiv.innerHTML =
-                        '<button onclick="copyRFEContent()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem;">' +
-                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.25rem;">' +
+                        '<button onclick="copyRFEContent()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
+                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
                                 '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>' +
                                 '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>' +
                             '</svg>' +
                             'Copy' +
                         '</button>' +
-                        '<button onclick="viewRFEContent()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem;">' +
-                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.25rem;">' +
+                        '<button onclick="downloadIdeaMd()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
+                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>' +
+                                '<polyline points="7 10 12 15 17 10"/>' +
+                                '<line x1="12" y1="15" x2="12" y2="3"/>' +
+                            '</svg>' +
+                            'Download' +
+                        '</button>' +
+                        '<button onclick="openIdeaInVSCode()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
+                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                '<path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>' +
+                            '</svg>' +
+                            'Open in VS Code' +
+                        '</button>' +
+                        '<button onclick="openIdeaInGoogleDocs()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
+                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>' +
+                                '<polyline points="14 2 14 8 20 8"/>' +
+                                '<line x1="16" y1="13" x2="8" y2="13"/>' +
+                                '<line x1="16" y1="17" x2="8" y2="17"/>' +
+                                '<line x1="10" y1="9" x2="8" y2="9"/>' +
+                            '</svg>' +
+                            'Open in Google Docs' +
+                        '</button>' +
+                        '<button onclick="viewRFEContent()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
+                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
                                 '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>' +
                                 '<circle cx="12" cy="12" r="3"/>' +
                             '</svg>' +
@@ -2292,6 +2497,37 @@ The proposed feature is technically feasible with manageable complexity and acce
                 const actionsDiv = document.getElementById('feasibility-actions');
                 if (actionsDiv) {
                     actionsDiv.innerHTML =
+                        '<button onclick="copyFeasibilityContent()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
+                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>' +
+                                '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>' +
+                            '</svg>' +
+                            'Copy' +
+                        '</button>' +
+                        '<button onclick="downloadFeasibilityMd()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
+                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>' +
+                                '<polyline points="7 10 12 15 17 10"/>' +
+                                '<line x1="12" y1="15" x2="12" y2="3"/>' +
+                            '</svg>' +
+                            'Download' +
+                        '</button>' +
+                        '<button onclick="openFeasibilityInVSCode()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
+                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                '<path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>' +
+                            '</svg>' +
+                            'Open in VS Code' +
+                        '</button>' +
+                        '<button onclick="openFeasibilityInGoogleDocs()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
+                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>' +
+                                '<polyline points="14 2 14 8 20 8"/>' +
+                                '<line x1="16" y1="13" x2="8" y2="13"/>' +
+                                '<line x1="16" y1="17" x2="8" y2="17"/>' +
+                                '<line x1="10" y1="9" x2="8" y2="9"/>' +
+                            '</svg>' +
+                            'Open in Google Docs' +
+                        '</button>' +
                         '<button onclick="viewFeasibilityContent()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
                             '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
                                 '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>' +
@@ -2464,211 +2700,226 @@ The proposed feature is technically feasible with manageable complexity and acce
             // Generate RFE document content
             const rfeDocContent = `# Request for Enhancement (RFE)
 
-## Feature Title
-[Feature Name from idea.md]
-
-## Executive Summary
-**Authored by: Parker (Product Manager)**
-
-This RFE consolidates the initial idea, technical feasibility assessment, and detailed specifications for the proposed feature. This document serves as the comprehensive blueprint for development, capturing business value, technical architecture, and implementation roadmap.
-
-### Business Value
-- Addresses key user pain points identified in market research
-- Aligns with Q2 product strategy and growth objectives
-- Expected to increase user engagement by 25-30%
-- Supports expansion into new market segments
-
-### Target Users
-- Primary: Platform engineers and DevOps teams
-- Secondary: Development team leads and architects
-- Estimated user base: 10,000+ active users
-
-## Product Requirements
-
-### User Stories
-
-**As a** platform engineer
-**I want to** [core functionality]
-**So that** I can improve my workflow efficiency
-
-**As a** team lead
-**I want to** [management capability]
-**So that** I can better coordinate team activities
-
-**As a** system architect
-**I want to** [architectural insight]
-**So that** I can make informed technical decisions
-
-### Functional Requirements
-1. **Core Functionality**
-   - Feature must support real-time updates
-   - Provide intuitive user interface with minimal learning curve
-   - Enable collaborative workflows across distributed teams
-
-2. **Data Management**
-   - Secure storage of user configurations
-   - Export/import capabilities for data portability
-   - Integration with existing data sources
-
-3. **User Experience**
-   - Responsive design for desktop and mobile
-   - Accessibility compliance (WCAG 2.1 AA)
-   - Support for dark/light themes
-
-### Non-Functional Requirements
-- **Performance**: Response time < 200ms for standard operations
-- **Scalability**: Support 10,000+ concurrent users
-- **Availability**: 99.9% uptime SLA
-- **Security**: SOC 2 Type II compliance
-- **Maintainability**: Comprehensive documentation and test coverage
-
-## Technical Architecture
-**Authored by: Archie (Architect)**
-
-### System Design Overview
-The feature will be implemented using a microservices architecture pattern, ensuring scalability and independent deployment capabilities.
-
-### Architecture Components
-
-#### Frontend Layer
-- **Technology**: React 18+ with TypeScript
-- **State Management**: Redux Toolkit for complex state
-- **UI Framework**: Tailwind CSS with custom component library
-- **Real-time Updates**: WebSocket connection for live data
-
-#### Backend Services
-- **API Gateway**: Kong for routing and rate limiting
-- **Core Service**: Node.js/Express microservice
-- **Data Layer**: PostgreSQL (primary), Redis (caching)
-- **Message Queue**: RabbitMQ for asynchronous processing
-
-#### Infrastructure
-- **Container Orchestration**: Kubernetes
-- **Service Mesh**: Istio for traffic management
-- **Monitoring**: Prometheus + Grafana stack
-- **Logging**: ELK Stack (Elasticsearch, Logstash, Kibana)
-
-### Data Model
-\`\`\`
-Users
-├── id (UUID, primary key)
-├── email (string, unique)
-├── preferences (JSONB)
-└── created_at (timestamp)
-
-Features
-├── id (UUID, primary key)
-├── user_id (UUID, foreign key)
-├── configuration (JSONB)
-├── status (enum)
-└── updated_at (timestamp)
-\`\`\`
-
-### Integration Points
-1. **Authentication Service**: OAuth 2.0 integration
-2. **Notification Service**: Email and in-app notifications
-3. **Analytics Service**: User behavior tracking
-4. **External APIs**: Third-party service integrations
-
-### Security Considerations
-- JWT-based authentication with refresh tokens
-- Role-based access control (RBAC)
-- Data encryption at rest and in transit
-- Regular security audits and penetration testing
-
-## Implementation Plan
-
-### Phase 1: Foundation (Sprint 1-2)
-- Set up infrastructure and development environment
-- Implement core data models and API endpoints
-- Basic frontend scaffolding
-
-### Phase 2: Core Features (Sprint 3-5)
-- Develop primary user workflows
-- Implement real-time synchronization
-- Integration with authentication service
-
-### Phase 3: Enhancement (Sprint 6-7)
-- Advanced features and customization options
-- Performance optimization
-- Comprehensive testing
-
-### Phase 4: Launch Preparation (Sprint 8)
-- Security audit and fixes
-- Documentation completion
-- Beta testing and feedback incorporation
-
-### Milestones
-- **Week 4**: Alpha release (internal testing)
-- **Week 8**: Beta release (limited user group)
-- **Week 10**: General availability (GA)
-
-## Resource Requirements
-
-### Team Composition
-- 2 Frontend Engineers
-- 2 Backend Engineers
-- 1 DevOps Engineer
-- 1 QA Engineer
-- Product Manager (20% allocation)
-- Architect (20% allocation)
-
-### Technology Stack
-- Existing infrastructure (no new licenses required)
-- Development tools already in place
-- Cloud resources: Additional 5 compute instances
-
-## Risk Assessment & Mitigation
-
-### Technical Risks
-**Risk**: Third-party API rate limiting
-**Mitigation**: Implement caching and fallback mechanisms
-
-**Risk**: Database performance under load
-**Mitigation**: Database sharding strategy, read replicas
-
-### Business Risks
-**Risk**: User adoption slower than expected
-**Mitigation**: Comprehensive onboarding, user feedback loops
-
-**Risk**: Competitive feature release
-**Mitigation**: Accelerated timeline, unique value proposition
-
-## Success Metrics
-
-### Key Performance Indicators (KPIs)
-- User adoption: 5,000+ active users in first month
-- Feature usage: 60%+ daily active user engagement
-- Performance: 95th percentile response time < 300ms
-- Reliability: 99.9% uptime in first quarter
-- User satisfaction: NPS score > 40
-
-### Monitoring & Evaluation
-- Weekly usage analytics reviews
-- Monthly performance assessments
-- Quarterly user satisfaction surveys
-- Continuous A/B testing for optimization
-
-## Dependencies & Assumptions
-
-### Dependencies
-- Authentication service upgrade (scheduled for Week 2)
-- Database migration completion (in progress)
-- API gateway configuration (DevOps team)
-
-### Assumptions
-- User base growth rate remains consistent
-- No major infrastructure changes during development
-- Third-party services maintain current SLAs
-
-## Conclusion
-
-This RFE represents a well-planned, technically feasible enhancement that delivers significant business value. The architecture is scalable, the timeline is realistic, and risks are identified with clear mitigation strategies. Approval is recommended to proceed with implementation.
+## Enhanced Model Discovery for AI Platform Engineers
 
 ---
-**Approval Status**: Pending Review
-**Next Steps**: Technical design review, resource allocation
-**Document Version**: 1.0
+
+### General Guidance
+This RFE is well-scoped and focused on improving the model discovery experience for AI Platform Engineers. It addresses a specific user pain point while remaining flexible in implementation approach to allow the RFE council to provide guidance on the optimal solution.
+
+**Guiding Principles Applied:**
+- ✓ Smaller, focused scope on model discovery enhancement
+- ✓ Not overly prescriptive - presents problem and high-level solution direction
+- ✓ Well-defined domain - AI model catalog and discovery workflows
+
+---
+
+## Problem Statement
+
+AI Platform Engineers like Paula face significant challenges when searching for and evaluating production-ready AI models from extensive catalogs containing thousands of options. The current model discovery interface presents several pain points:
+
+**Current State Challenges:**
+1. **Overwhelming Volume**: Engineers must manually scan through thousands of models to find candidates suitable for their specific use case
+2. **Limited Filtering**: Existing search only supports basic text-based queries, lacking advanced filtering by performance metrics, hardware requirements, or use case categories
+3. **No Visual Comparison**: Engineers cannot easily compare key metrics (latency, throughput, accuracy, cost) across multiple models side-by-side
+4. **Inefficient Workflow**: The process of discovery → evaluation → selection → deployment requires navigating multiple disconnected screens and tools
+5. **Missing Context**: Models are presented without contextual information about real-world performance, similar model comparisons, or recommended use cases
+
+**User Impact:**
+- Platform engineers spend 3-5 hours on average finding the right model for a new project
+- 40% of model selections result in suboptimal performance, requiring engineers to restart the discovery process
+- Lack of confidence in model selection leads to delayed project timelines
+
+**Current Workflow Diagram:**
+\`\`\`
+Browse catalog → Search by keyword → Open model details (new page) →
+Check metrics individually → Copy to spreadsheet for comparison →
+Repeat 10-15 times → Make selection → Discover incompatibility → Restart
+\`\`\`
+
+---
+
+## Business Alignment
+
+### 1. Business Value and Impact
+
+**Expected Impact:**
+- **Customer Reach**: 500+ AI Platform Engineers currently using the platform, with 2,000+ potential users in pipeline
+- **Time Savings**: Reduce model discovery time from 3-5 hours to 30-45 minutes (75% reduction)
+- **Revenue Opportunity**: Improved experience expected to increase platform adoption by 25%, translating to $1.2M ARR growth
+- **Customer Satisfaction**: Address #1 feature request from enterprise customers (mentioned in 80% of customer interviews)
+
+**Market Opportunity:**
+- AI/ML platform market growing at 38% CAGR
+- Competitors lack sophisticated model discovery features
+- Early advantage in this space can establish market leadership
+- 3 enterprise deals ($500K+ each) currently delayed pending this enhancement
+
+### 2. Red Hat AI Outcome Alignment
+
+This enhancement aligns with the **"Accelerate AI Developer Productivity"** outcome by:
+- Reducing friction in the AI development workflow
+- Empowering engineers to make faster, more informed decisions
+- Improving overall platform efficiency and user satisfaction
+- Supporting enterprise AI adoption at scale
+
+---
+
+## Proposed Solution/Rationale
+
+**High-Level Approach:**
+Transform the model discovery experience from a traditional text-based catalog into an intelligent, visual, and task-oriented discovery interface that helps engineers quickly find optimal models for their specific requirements.
+
+**Key Capabilities:**
+
+1. **Smart Filtering & Search**
+   - Multi-dimensional filtering (use case, performance tier, hardware compatibility, license type)
+   - Natural language search with intent detection
+   - Saved search queries and filter presets
+
+2. **Visual Model Comparison**
+   - Side-by-side comparison view (up to 5 models)
+   - Interactive performance charts (latency, throughput, accuracy trade-offs)
+   - Cost estimation based on expected usage patterns
+
+3. **Contextual Recommendations**
+   - "Similar models" suggestions based on current selection
+   - Use-case-specific model recommendations
+   - Community ratings and production deployment statistics
+
+4. **Streamlined Workflow**
+   - Single-page application with embedded model details
+   - Quick-deploy actions directly from discovery interface
+   - Integration with deployment pipeline
+
+**User Scenarios:**
+
+**Scenario 1 - New Project Model Selection:**
+Paula needs to find a text classification model for a customer support automation project. She enters "customer support classification" in natural language search, filters by "production-ready" and "latency < 100ms", compares top 3 candidates visually, reviews community feedback, and deploys directly from the comparison view. Total time: 25 minutes.
+
+**Scenario 2 - Model Upgrade:**
+Paula's current sentiment analysis model is underperforming. She uses "Find similar models" on her existing deployment, filters for "higher accuracy" while maintaining similar latency, compares upgrade candidates side-by-side with current model performance, and makes data-driven upgrade decision. Total time: 15 minutes.
+
+**Assumptions:**
+- Model catalog metadata includes standardized performance benchmarks
+- Models have consistent tagging and categorization
+- Backend API can support complex filtering queries with acceptable performance
+- Users have basic familiarity with ML concepts and metrics
+
+---
+
+## Acceptance Criteria
+
+**Success is defined by:**
+
+1. **Functional Requirements**
+   - ✓ Users can filter models by at least 5 dimensions (use case, performance, hardware, framework, license)
+   - ✓ Side-by-side comparison supports 3-5 models simultaneously
+   - ✓ Visual charts display latency, throughput, accuracy, and cost metrics
+   - ✓ Natural language search returns relevant results with >80% accuracy
+   - ✓ Users can save searches and create custom filter presets
+   - ✓ Integration with deployment pipeline allows one-click deployment from discovery UI
+
+2. **Performance Requirements**
+   - ✓ Search and filter operations return results in <2 seconds
+   - ✓ Comparison view loads all model data in <3 seconds
+   - ✓ UI remains responsive with catalog sizes up to 10,000 models
+
+3. **User Experience**
+   - ✓ Accessibility compliance (WCAG 2.1 AA standard)
+   - ✓ Mobile-responsive design for tablet access
+   - ✓ Intuitive UX requiring <5 minutes for new user onboarding
+
+4. **Documentation & Support**
+   - ✓ User guide with discovery workflow best practices
+   - ✓ Interactive tutorial for first-time users
+   - ✓ API documentation for programmatic model discovery
+
+5. **Testing & Quality**
+   - ✓ >90% test coverage for filtering and comparison logic
+   - ✓ User acceptance testing with 10+ AI Platform Engineers
+   - ✓ A/B testing framework to validate effectiveness metrics
+
+---
+
+## Affected Customers/Partners & Scope
+
+**Primary Beneficiaries:**
+- **Current Customers**: 500+ AI Platform Engineers across 75 enterprise accounts
+- **Target Customers**: 2,000+ engineers in sales pipeline (specific accounts: Acme Corp, TechGiant Inc., FinancePartners LLC)
+- **Partner Ecosystem**: 12 ISV partners who provide pre-trained models to the catalog
+
+**Impact Scope:**
+- **Broad Impact**: Enhancement benefits all users of the model catalog, regardless of industry, use case, or experience level
+- **High-Priority Segments**:
+  - Financial services (35% of user base) - need rapid, compliant model selection
+  - Healthcare/Life sciences (20% of user base) - require certified, auditable models
+  - Retail/E-commerce (15% of user base) - prioritize cost efficiency and scalability
+
+**Customer Validation:**
+- 15 customer interviews conducted (notes attached in research folder)
+- Feature request appears in 45 support tickets over past 6 months
+- NPS verbatim feedback mentions model discovery pain in 60% of detractor comments
+- Beta testing commitments from 8 enterprise customers
+
+**Regional Considerations:**
+- Global scope - all regions benefit equally
+- Localization may be needed for natural language search (future enhancement)
+
+---
+
+## Alternative Approaches Considered
+
+### Option 1: Enhanced Traditional List View
+**Description**: Improve existing list-based UI with better filters and inline metric display
+**Why Inadequate**: Doesn't address core issue of information overload; still requires significant manual comparison work; doesn't leverage visual pattern recognition for decision-making
+
+### Option 2: AI-Powered Model Recommendation Chatbot
+**Description**: Conversational interface where users describe requirements and receive model suggestions
+**Why Inadequate**: Removes user control and transparency; engineers prefer to evaluate options themselves; trust issues with "black box" recommendations; doesn't support exploratory discovery workflows
+
+### Option 3: Spreadsheet Export for External Analysis
+**Description**: Provide robust export functionality for users to analyze in Excel/Sheets
+**Why Inadequate**: Shifts burden to users; doesn't improve platform experience; data becomes stale; no integration with deployment workflow; poor user experience
+
+### Option 4: Integration with Third-Party Model Hubs
+**Description**: Embed external model discovery tools (e.g., Hugging Face, ModelZoo)
+**Why Inadequate**: Creates inconsistent UX; requires users to learn multiple tools; doesn't integrate with our deployment infrastructure; licensing and data privacy concerns; doesn't differentiate our platform
+
+**Why New Approach is Needed:**
+Existing tools and approaches treat model discovery as a search problem rather than a decision-support problem. Our proposed solution recognizes that engineers need not just to find models, but to confidently select the optimal model through visual comparison, contextual information, and streamlined workflows—capabilities that don't exist in current market offerings.
+
+---
+
+## Reference Documents/Links
+
+**User Research:**
+- Customer Interview Summary (June 2024): [Link to research folder]
+- Platform Engineer Persona Study: [Link to product docs]
+- User Journey Maps - Model Discovery: [Link to Miro board]
+
+**Competitive Analysis:**
+- Feature Comparison Matrix: [Link to competitive analysis doc]
+- Hugging Face Hub UX Review: [Link to analysis]
+- AWS SageMaker Model Catalog Analysis: [Link to analysis]
+
+**Technical Resources:**
+- Model Catalog API Documentation: [Link to API docs]
+- Performance Benchmarking Standards: [Link to standards doc]
+- Frontend Component Library: [Link to design system]
+
+**Business Documentation:**
+- Market Opportunity Analysis (Q2 2024): [Link to business case]
+- Customer Feature Request Tracker: [JIRA-12345]
+- Sales Pipeline Impact Report: [Link to sales analysis]
+
+---
+
+**Document Metadata**
+**Created by**: Parker (Product Manager) & Archie (Architect)
+**Review Status**: Ready for RFE Council Review
+**Priority**: High
+**Target Release**: Q3 2024
 **Last Updated**: ${new Date().toLocaleDateString()}
 
 *Authored by: Parker (Product Manager), Archie (Architect)*
@@ -2689,6 +2940,37 @@ This RFE represents a well-planned, technically feasible enhancement that delive
                 const actionsDiv = document.getElementById('rfe-doc-actions');
                 if (actionsDiv) {
                     actionsDiv.innerHTML =
+                        '<button onclick="copyRFEDocContent()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
+                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>' +
+                                '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>' +
+                            '</svg>' +
+                            'Copy' +
+                        '</button>' +
+                        '<button onclick="downloadRFEMd()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
+                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>' +
+                                '<polyline points="7 10 12 15 17 10"/>' +
+                                '<line x1="12" y1="15" x2="12" y2="3"/>' +
+                            '</svg>' +
+                            'Download' +
+                        '</button>' +
+                        '<button onclick="openRFEInVSCode()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
+                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                '<path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>' +
+                            '</svg>' +
+                            'Open in VS Code' +
+                        '</button>' +
+                        '<button onclick="openRFEInGoogleDocs()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
+                            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>' +
+                                '<polyline points="14 2 14 8 20 8"/>' +
+                                '<line x1="16" y1="13" x2="8" y2="13"/>' +
+                                '<line x1="16" y1="17" x2="8" y2="17"/>' +
+                                '<line x1="10" y1="9" x2="8" y2="9"/>' +
+                            '</svg>' +
+                            'Open in Google Docs' +
+                        '</button>' +
                         '<button onclick="viewRFEDocContent()" class="btn btn-secondary" style="padding: 0.375rem 0.75rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">' +
                             '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
                                 '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>' +
@@ -2797,23 +3079,115 @@ This RFE represents a well-planned, technically feasible enhancement that delive
                     resultsList = resultsContent.querySelector('div');
                 }
 
-                // Add new result item with clickable filename
+                // Add new result item with clickable filename and action buttons
                 const resultItem = document.createElement('div');
-                resultItem.style.cssText = 'margin-bottom: 0.5rem;';
+                resultItem.style.cssText = 'margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;';
 
-                // Make idea.md, feasibility.md, rfe.md, or spec.md clickable
+                // Determine which file type and create appropriate links and buttons
                 var messageWithLink = message;
+                var actionButtons = '';
+
                 if (message.includes('idea.md')) {
                     messageWithLink = message.replace('idea.md', '<a href="#" onclick="viewRFEContent(); return false;" style="color: #1e40af; text-decoration: underline; cursor: pointer;">idea.md</a>');
+                    actionButtons = `
+                        <div style="display: flex; gap: 0.25rem; margin-left: auto;">
+                            <button onclick="copyRFEContent()" title="Copy" style="padding: 0.25rem; background: transparent; border: 1px solid #e2e8f0; border-radius: 0.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                            </button>
+                            <button onclick="downloadIdeaMd()" title="Download" style="padding: 0.25rem; background: transparent; border: 1px solid #e2e8f0; border-radius: 0.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                            </button>
+                            <button onclick="openIdeaInVSCode()" title="Open in VS Code" style="padding: 0.25rem; background: transparent; border: 1px solid #e2e8f0; border-radius: 0.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                                    <path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>
+                                </svg>
+                            </button>
+                            <button onclick="openIdeaInGoogleDocs()" title="Open in Google Docs" style="padding: 0.25rem; background: transparent; border: 1px solid #e2e8f0; border-radius: 0.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                </svg>
+                            </button>
+                        </div>
+                    `;
                 } else if (message.includes('feasibility.md')) {
                     messageWithLink = message.replace('feasibility.md', '<a href="#" onclick="viewFeasibilityContent(); return false;" style="color: #1e40af; text-decoration: underline; cursor: pointer;">feasibility.md</a>');
+                    actionButtons = `
+                        <div style="display: flex; gap: 0.25rem; margin-left: auto;">
+                            <button onclick="copyFeasibilityContent()" title="Copy" style="padding: 0.25rem; background: transparent; border: 1px solid #e2e8f0; border-radius: 0.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                            </button>
+                            <button onclick="downloadFeasibilityMd()" title="Download" style="padding: 0.25rem; background: transparent; border: 1px solid #e2e8f0; border-radius: 0.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                            </button>
+                            <button onclick="openFeasibilityInVSCode()" title="Open in VS Code" style="padding: 0.25rem; background: transparent; border: 1px solid #e2e8f0; border-radius: 0.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                                    <path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>
+                                </svg>
+                            </button>
+                            <button onclick="openFeasibilityInGoogleDocs()" title="Open in Google Docs" style="padding: 0.25rem; background: transparent; border: 1px solid #e2e8f0; border-radius: 0.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                </svg>
+                            </button>
+                        </div>
+                    `;
                 } else if (message.includes('rfe.md')) {
                     messageWithLink = message.replace('rfe.md', '<a href="#" onclick="viewRFEDocContent(); return false;" style="color: #1e40af; text-decoration: underline; cursor: pointer;">rfe.md</a>');
+                    actionButtons = `
+                        <div style="display: flex; gap: 0.25rem; margin-left: auto;">
+                            <button onclick="copyRFEDocContent()" title="Copy" style="padding: 0.25rem; background: transparent; border: 1px solid #e2e8f0; border-radius: 0.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                            </button>
+                            <button onclick="downloadRFEMd()" title="Download" style="padding: 0.25rem; background: transparent; border: 1px solid #e2e8f0; border-radius: 0.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                            </button>
+                            <button onclick="openRFEInVSCode()" title="Open in VS Code" style="padding: 0.25rem; background: transparent; border: 1px solid #e2e8f0; border-radius: 0.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                                    <path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>
+                                </svg>
+                            </button>
+                            <button onclick="openRFEInGoogleDocs()" title="Open in Google Docs" style="padding: 0.25rem; background: transparent; border: 1px solid #e2e8f0; border-radius: 0.25rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                </svg>
+                            </button>
+                        </div>
+                    `;
                 } else if (message.includes('spec.md')) {
                     messageWithLink = message.replace('spec.md', '<a href="#" onclick="viewSpecContent(); return false;" style="color: #1e40af; text-decoration: underline; cursor: pointer;">spec.md</a>');
                 }
 
-                resultItem.innerHTML = '✅ ' + messageWithLink;
+                resultItem.innerHTML = '<span style="flex-shrink: 0;">✅ ' + messageWithLink + '</span>' + actionButtons;
                 resultsList.appendChild(resultItem);
             }
         }
@@ -2826,6 +3200,93 @@ This RFE represents a well-planned, technically feasible enhancement that delive
             }).catch(function(err) {
                 console.error('Failed to copy: ', err);
             });
+        }
+
+        // Download idea.md file
+        function downloadIdeaMd() {
+            const ideaContent = document.getElementById('rfe-content').textContent;
+            const blob = new Blob([ideaContent], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'idea.md';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Open idea.md in VS Code
+        function openIdeaInVSCode() {
+            const ideaContent = document.getElementById('rfe-content').textContent;
+
+            // Create a temporary download to get the file locally
+            const blob = new Blob([ideaContent], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'idea.md';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            // Show user-friendly message about opening in VS Code
+            setTimeout(() => {
+                const shouldOpen = confirm('File downloaded to your Downloads folder.\n\nClick OK to attempt opening VS Code (if installed), or Cancel to open manually.');
+                if (shouldOpen) {
+                    // Try to use VS Code protocol handler
+                    // Note: This may not work in all browsers/systems
+                    const vscodeUrl = 'vscode://file/' + encodeURIComponent(navigator.userAgent.includes('Mac') ?
+                        '/Users/' + (window.location.pathname.split('/')[2] || 'user') + '/Downloads/idea.md' :
+                        'C:/Users/' + (window.location.pathname.split('/')[2] || 'user') + '/Downloads/idea.md');
+                    window.location.href = vscodeUrl;
+
+                    // Fallback message
+                    setTimeout(() => {
+                        alert('If VS Code didn\'t open, please:\n1. Locate idea.md in your Downloads folder\n2. Right-click and select "Open with VS Code"\n3. Or drag the file into VS Code');
+                    }, 1000);
+                }
+            }, 500);
+        }
+
+        // Open idea.md in Google Docs
+        function openIdeaInGoogleDocs() {
+            const ideaContent = document.getElementById('rfe-content').textContent;
+
+            // Create a blob and convert to base64 for Google Docs
+            const blob = new Blob([ideaContent], { type: 'text/plain' });
+            const reader = new FileReader();
+
+            reader.onloadend = function() {
+                // Google Docs doesn't have a direct protocol handler like VS Code
+                // We'll open Google Docs in a new tab and show instructions
+                const googleDocsUrl = 'https://docs.google.com/document/create';
+                const newWindow = window.open(googleDocsUrl, '_blank');
+
+                // Copy content to clipboard for easy pasting
+                navigator.clipboard.writeText(ideaContent).then(() => {
+                    setTimeout(() => {
+                        alert('Opening Google Docs in a new tab.\n\nThe content has been copied to your clipboard.\nPaste it into the new Google Doc (Ctrl/Cmd + V).');
+                    }, 500);
+                }).catch(() => {
+                    // If clipboard fails, download the file instead
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'idea.md';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+
+                    setTimeout(() => {
+                        alert('Opening Google Docs in a new tab.\n\nFile downloaded to your Downloads folder.\nIn Google Docs, go to File > Open > Upload to import idea.md');
+                    }, 500);
+                });
+            };
+
+            reader.readAsDataURL(blob);
         }
 
         // View RFE content in new window or modal
@@ -2852,6 +3313,101 @@ This RFE represents a well-planned, technically feasible enhancement that delive
             newWindow.document.close();
         }
 
+        // Copy feasibility.md content to clipboard
+        function copyFeasibilityContent() {
+            const feasibilityContent = document.getElementById('feasibility-content').textContent;
+            navigator.clipboard.writeText(feasibilityContent).then(function() {
+                alert('Feasibility content copied to clipboard!');
+            }).catch(function(err) {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Download feasibility.md file
+        function downloadFeasibilityMd() {
+            const feasibilityContent = document.getElementById('feasibility-content').textContent;
+            const blob = new Blob([feasibilityContent], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'feasibility.md';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Open feasibility.md in VS Code
+        function openFeasibilityInVSCode() {
+            const feasibilityContent = document.getElementById('feasibility-content').textContent;
+
+            // Create a temporary download to get the file locally
+            const blob = new Blob([feasibilityContent], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'feasibility.md';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            // Show user-friendly message about opening in VS Code
+            setTimeout(() => {
+                const shouldOpen = confirm('File downloaded to your Downloads folder.\n\nClick OK to attempt opening VS Code (if installed), or Cancel to open manually.');
+                if (shouldOpen) {
+                    // Try to use VS Code protocol handler
+                    const vscodeUrl = 'vscode://file/' + encodeURIComponent(navigator.userAgent.includes('Mac') ?
+                        '/Users/' + (window.location.pathname.split('/')[2] || 'user') + '/Downloads/feasibility.md' :
+                        'C:/Users/' + (window.location.pathname.split('/')[2] || 'user') + '/Downloads/feasibility.md');
+                    window.location.href = vscodeUrl;
+
+                    // Fallback message
+                    setTimeout(() => {
+                        alert('If VS Code didn\'t open, please:\n1. Locate feasibility.md in your Downloads folder\n2. Right-click and select "Open with VS Code"\n3. Or drag the file into VS Code');
+                    }, 1000);
+                }
+            }, 500);
+        }
+
+        // Open feasibility.md in Google Docs
+        function openFeasibilityInGoogleDocs() {
+            const feasibilityContent = document.getElementById('feasibility-content').textContent;
+
+            // Create a blob and convert to base64 for Google Docs
+            const blob = new Blob([feasibilityContent], { type: 'text/plain' });
+            const reader = new FileReader();
+
+            reader.onloadend = function() {
+                // Open Google Docs in a new tab
+                const googleDocsUrl = 'https://docs.google.com/document/create';
+                const newWindow = window.open(googleDocsUrl, '_blank');
+
+                // Copy content to clipboard for easy pasting
+                navigator.clipboard.writeText(feasibilityContent).then(() => {
+                    setTimeout(() => {
+                        alert('Opening Google Docs in a new tab.\n\nThe content has been copied to your clipboard.\nPaste it into the new Google Doc (Ctrl/Cmd + V).');
+                    }, 500);
+                }).catch(() => {
+                    // If clipboard fails, download the file instead
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'feasibility.md';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+
+                    setTimeout(() => {
+                        alert('Opening Google Docs in a new tab.\n\nFile downloaded to your Downloads folder.\nIn Google Docs, go to File > Open > Upload to import feasibility.md');
+                    }, 500);
+                });
+            };
+
+            reader.readAsDataURL(blob);
+        }
+
         // View rfe.md content in new window
         function viewRFEDocContent() {
             const rfeDocContent = document.getElementById('rfe-doc-content').textContent;
@@ -2862,6 +3418,101 @@ This RFE represents a well-planned, technically feasible enhancement that delive
             newWindow.document.write(rfeDocContent);
             newWindow.document.write('</body></html>');
             newWindow.document.close();
+        }
+
+        // Copy rfe.md content to clipboard
+        function copyRFEDocContent() {
+            const rfeDocContent = document.getElementById('rfe-doc-content').textContent;
+            navigator.clipboard.writeText(rfeDocContent).then(function() {
+                alert('RFE content copied to clipboard!');
+            }).catch(function(err) {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Download rfe.md file
+        function downloadRFEMd() {
+            const rfeDocContent = document.getElementById('rfe-doc-content').textContent;
+            const blob = new Blob([rfeDocContent], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'rfe.md';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Open rfe.md in VS Code
+        function openRFEInVSCode() {
+            const rfeDocContent = document.getElementById('rfe-doc-content').textContent;
+
+            // Create a temporary download to get the file locally
+            const blob = new Blob([rfeDocContent], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'rfe.md';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            // Show user-friendly message about opening in VS Code
+            setTimeout(() => {
+                const shouldOpen = confirm('File downloaded to your Downloads folder.\n\nClick OK to attempt opening VS Code (if installed), or Cancel to open manually.');
+                if (shouldOpen) {
+                    // Try to use VS Code protocol handler
+                    const vscodeUrl = 'vscode://file/' + encodeURIComponent(navigator.userAgent.includes('Mac') ?
+                        '/Users/' + (window.location.pathname.split('/')[2] || 'user') + '/Downloads/rfe.md' :
+                        'C:/Users/' + (window.location.pathname.split('/')[2] || 'user') + '/Downloads/rfe.md');
+                    window.location.href = vscodeUrl;
+
+                    // Fallback message
+                    setTimeout(() => {
+                        alert('If VS Code didn\'t open, please:\n1. Locate rfe.md in your Downloads folder\n2. Right-click and select "Open with VS Code"\n3. Or drag the file into VS Code');
+                    }, 1000);
+                }
+            }, 500);
+        }
+
+        // Open rfe.md in Google Docs
+        function openRFEInGoogleDocs() {
+            const rfeDocContent = document.getElementById('rfe-doc-content').textContent;
+
+            // Create a blob and convert to base64 for Google Docs
+            const blob = new Blob([rfeDocContent], { type: 'text/plain' });
+            const reader = new FileReader();
+
+            reader.onloadend = function() {
+                // Open Google Docs in a new tab
+                const googleDocsUrl = 'https://docs.google.com/document/create';
+                const newWindow = window.open(googleDocsUrl, '_blank');
+
+                // Copy content to clipboard for easy pasting
+                navigator.clipboard.writeText(rfeDocContent).then(() => {
+                    setTimeout(() => {
+                        alert('Opening Google Docs in a new tab.\n\nThe content has been copied to your clipboard.\nPaste it into the new Google Doc (Ctrl/Cmd + V).');
+                    }, 500);
+                }).catch(() => {
+                    // If clipboard fails, download the file instead
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'rfe.md';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+
+                    setTimeout(() => {
+                        alert('Opening Google Docs in a new tab.\n\nFile downloaded to your Downloads folder.\nIn Google Docs, go to File > Open > Upload to import rfe.md');
+                    }, 500);
+                });
+            };
+
+            reader.readAsDataURL(blob);
         }
 
         // Run /specify command
@@ -3354,6 +4005,20 @@ This RFE represents a well-planned, technically feasible enhancement that delive
             if (userMessage.toLowerCase().indexOf('/ideate') === 0) {
                 // Run the ideate command workflow
                 runIdeateCommand();
+                return;
+            }
+
+            // Check if user message starts with /feasibility
+            if (userMessage.toLowerCase().indexOf('/feasibility') === 0) {
+                // Run the feasibility command workflow
+                runFeasibilityCommand();
+                return;
+            }
+
+            // Check if user message starts with /describe
+            if (userMessage.toLowerCase().indexOf('/describe') === 0) {
+                // Run the describe command workflow
+                runDescribeCommand();
                 return;
             }
 
