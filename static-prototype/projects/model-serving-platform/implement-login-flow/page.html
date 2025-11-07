@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>implement-login-flow - sample-workspace - Ambient Code Platform</title>
+    <title>implement-login-flow - model-serving-platform - Ambient Code Platform</title>
     <link rel="stylesheet" href="../../../styles.css">
     <style>
         .chat-container {
@@ -134,7 +134,7 @@
             <div class="breadcrumbs">
                 <a href="../../../index.html">Workspaces</a>
                 <span>/</span>
-                <a href="../page.html">sample-workspace</a>
+                <a href="../page.html">model-serving-platform</a>
                 <span>/</span>
                 <span>implement-login-flow</span>
             </div>
@@ -221,6 +221,25 @@
     </main>
 
     <script>
+        // Extract model from URL parameter
+        var selectedModel = 'claude-sonnet-3.7'; // default
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('model')) {
+            selectedModel = urlParams.get('model');
+        }
+
+        // Update model display on page load
+        function updateModelDisplay() {
+            // Update page header description
+            var pageDescription = document.querySelector('.page-description');
+            if (pageDescription) {
+                pageDescription.textContent = 'Real-time AI coding session • ' + selectedModel + ' • Started 4 hours ago';
+            }
+        }
+
+        // Call on page load
+        window.addEventListener('load', updateModelDisplay);
+
         // User dropdown functionality
         function toggleUserDropdown() {
             const dropdown = document.getElementById('userDropdownMenu');

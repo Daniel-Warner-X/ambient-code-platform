@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sample-workspace - Ambient Code Platform</title>
+    <title>model-serving-platform - Ambient Code Platform</title>
     <link rel="stylesheet" href="../../styles.css">
 </head>
 <body>
@@ -58,10 +58,10 @@
             <div class="breadcrumbs">
                 <a href="../../index.html">Workspaces</a>
                 <span>/</span>
-                <span>sample-workspace</span>
+                <span>model-serving-platform</span>
             </div>
-            <h1 class="page-title">sample-workspace</h1>
-            <p class="page-description">A sample workspace for demonstration purposes</p>
+            <h1 class="page-title">model-serving-platform</h1>
+            <p class="page-description">Cool new features for my model serving platform.</p>
         </div>
     </div>
 
@@ -135,7 +135,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr onclick="window.location.href='implement-login-flow/page.html'" style="cursor: pointer;">
+                                    <tr onclick="window.location.href='implement-login-flow/page.html?model=claude-3.5-sonnet'" style="cursor: pointer;">
                                         <td>
                                             <div>
                                                 <div style="color: #1e40af; font-weight: 500;">implement-login-flow</div>
@@ -147,19 +147,7 @@
                                         <td>claude-3.5-sonnet</td>
                                         <td>4 hours ago</td>
                                     </tr>
-                                    <tr onclick="window.location.href='setup-database/headless.html'" style="cursor: pointer;">
-                                        <td>
-                                            <div>
-                                                <div style="color: #1e40af; font-weight: 500;">setup-database</div>
-                                                <div style="font-size: 0.875rem; color: #64748b;">Initialize PostgreSQL database with user tables</div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge badge-success" style="white-space: nowrap;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.25rem;"><path d="M20 6L9 17l-5-5"/></svg>Completed</span></td>
-                                        <td>headless</td>
-                                        <td>claude-3.5-sonnet</td>
-                                        <td>1 day ago</td>
-                                    </tr>
-                                    <tr onclick="window.location.href='create-api-tests/page.html'" style="cursor: pointer;">
+                                    <tr onclick="window.location.href='create-api-tests/page.html?model=claude-3.5-sonnet'" style="cursor: pointer;">
                                         <td>
                                             <div>
                                                 <div style="color: #1e40af; font-weight: 500;">create-api-tests</div>
@@ -171,7 +159,7 @@
                                         <td>claude-3.5-sonnet</td>
                                         <td>30 minutes ago</td>
                                     </tr>
-                                    <tr onclick="window.location.href='optimize-queries/headless.html'" style="cursor: pointer;">
+                                    <tr onclick="window.location.href='optimize-queries/headless.html?model=claude-3.5-sonnet'" style="cursor: pointer;">
                                         <td>
                                             <div>
                                                 <div style="color: #1e40af; font-weight: 500;">optimize-queries</div>
@@ -474,12 +462,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Workspace Name</label>
-                                    <input type="text" class="form-input" value="sample-workspace" readonly>
+                                    <input type="text" class="form-input" value="model-serving-platform" readonly>
                                     <small style="color: #64748b; font-size: 0.875rem;">Workspace name cannot be changed after creation</small>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Description</label>
-                                    <textarea class="form-input form-textarea">A sample workspace for demonstration purposes</textarea>
+                                    <textarea class="form-input form-textarea">Cool new features for my model serving platform.</textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
                             </form>
@@ -972,7 +960,7 @@
 
                 // Create new row
                 const newRow = document.createElement('tr');
-                const sessionUrl = pendingSessionType === 'interactive' ? `${sessionName}/page.html` : `${sessionName}/headless.html`;
+                const sessionUrl = pendingSessionType === 'interactive' ? `${sessionName}/page.html?model=${encodeURIComponent(model)}` : `${sessionName}/headless.html?model=${encodeURIComponent(model)}`;
 
                 newRow.onclick = function() {
                     window.location.href = sessionUrl;

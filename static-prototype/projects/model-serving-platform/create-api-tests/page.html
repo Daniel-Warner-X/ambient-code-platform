@@ -3,62 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>optimize-queries - sample-workspace - Ambient Code Platform</title>
+    <title>create-api-tests - model-serving-platform - Ambient Code Platform</title>
     <link rel="stylesheet" href="../../../styles.css">
     <style>
-        .session-container {
+        .chat-container {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
             background: white;
             border: 1px solid #e2e8f0;
             border-radius: 0.5rem;
-            overflow: hidden;
         }
         
-        .log-container {
-            height: 60vh;
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
             overflow-y: auto;
-            background: #1a1a1a;
-            color: #e5e5e5;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
             font-size: 0.875rem;
-            line-height: 1.4;
+            flex-shrink: 0;
         }
         
-        .log-line {
-            padding: 0.25rem 1rem;
-            border-bottom: 1px solid #333;
-            white-space: pre-wrap;
+        .user-avatar {
+            background: #64748b;
+            color: white;
         }
         
-        .log-timestamp {
-            color: #64748b;
-            margin-right: 0.5rem;
+        .ai-avatar {
+            background: #1e40af;
+            color: white;
         }
         
-        .log-level-info {
-            color: #3b82f6;
+        .message-content {
+            flex: 1;
+            background: #f8fafc;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
         }
         
-        .log-level-success {
-            color: #10b981;
+        .message-header {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            font-size: 0.875rem;
         }
         
-        .log-level-warning {
-            color: #f59e0b;
+        .chat-input {
+            padding: 1rem;
+            display: flex;
+            gap: 0.5rem;
         }
         
-        .progress-bar {
-            background: #e2e8f0;
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 1rem;
-        }
-        
-        .progress-fill {
-            background: #10b981;
-            height: 100%;
-            width: 100%;
-            border-radius: 4px;
+        .session-status {
+            background: #f0fdf4;
+            border: 1px solid #10b981;
+            border-radius: 0.375rem;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
     </style>
 </head>
@@ -115,13 +134,13 @@
             <div class="breadcrumbs">
                 <a href="../../../index.html">Workspaces</a>
                 <span>/</span>
-                <a href="../page.html">sample-workspace</a>
+                <a href="../page.html">model-serving-platform</a>
                 <span>/</span>
-                <span>optimize-queries</span>
+                <span>create-api-tests</span>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div style="display: flex; align-items: center; gap: 1rem;">
-                    <h1 class="page-title">Headless Session: optimize-queries</h1>
+                    <h1 class="page-title">Interactive Session: create-api-tests</h1>
                     <span class="badge badge-success" style="white-space: nowrap;">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.25rem;">
                             <path d="M20 6L9 17l-5-5"/>
@@ -147,125 +166,96 @@
                     </button>
                 </div>
             </div>
-            <p class="page-description">Optimize database queries for better performance • claude-3.5-sonnet • Completed 2 hours ago</p>
+            <p class="page-description">Write comprehensive API tests for authentication endpoints • claude-3.5-sonnet • Completed 30 minutes ago</p>
         </div>
     </div>
 
     <main class="container" style="margin-top: 2rem;">
 
-        <div class="grid grid-2">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Session Configuration</h3>
-                </div>
-                <div class="card-content">
-                    <div style="margin-bottom: 0.75rem;">
-                        <strong>Task:</strong> Optimize database queries for better performance
-                    </div>
-                    <div style="margin-bottom: 0.75rem;">
-                        <strong>Model:</strong> claude-3.5-sonnet
-                    </div>
-                    <div style="margin-bottom: 0.75rem;">
-                        <strong>Mode:</strong> Headless
-                    </div>
-                    <div style="margin-bottom: 0.75rem;">
-                        <strong>Duration:</strong> 18 minutes
-                    </div>
-                    <div>
-                        <strong>Status:</strong> 
-                        <span class="badge badge-success" style="white-space: nowrap;">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.25rem;">
-                                <path d="M20 6L9 17l-5-5"/>
-                            </svg>
-                            Completed
-                        </span>
+        <div class="chat-container">
+            <div class="chat-messages">
+                <div class="message">
+                    <div class="message-avatar user-avatar">DU</div>
+                    <div class="message-content">
+                        <div class="message-header">You</div>
+                        <div>Write comprehensive API tests for the authentication endpoints we created</div>
                     </div>
                 </div>
-            </div>
+                
+                <div class="message">
+                    <div class="message-avatar ai-avatar">AI</div>
+                    <div class="message-content">
+                        <div class="message-header">Claude</div>
+                        <div>I'll create comprehensive API tests for your authentication endpoints. Let me start with testing the registration, login, and token validation endpoints...</div>
+                    </div>
+                </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Performance Results</h3>
-                </div>
-                <div class="card-content">
-                    <div style="margin-bottom: 1rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span>Query Optimization</span>
-                            <span style="font-weight: 500; color: #10b981;">100%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill"></div>
-                        </div>
-                    </div>
-                    <div style="font-size: 0.875rem; color: #64748b;">
-                        <div style="margin-bottom: 0.25rem;">✓ Analyzed slow queries</div>
-                        <div style="margin-bottom: 0.25rem;">✓ Added database indexes</div>
-                        <div style="margin-bottom: 0.25rem;">✓ Optimized JOIN operations</div>
-                        <div style="margin-bottom: 0.25rem;">✓ Reduced query time by 75%</div>
-                        <div>✓ Updated documentation</div>
+                <div class="message">
+                    <div class="message-avatar user-avatar">DU</div>
+                    <div class="message-content">
+                        <div class="message-header">You</div>
+                        <div>Make sure to test edge cases like invalid emails and weak passwords</div>
                     </div>
                 </div>
-            </div>
-        </div>
+                
+                <div class="message">
+                    <div class="message-avatar ai-avatar">AI</div>
+                    <div class="message-content">
+                        <div class="message-header">Claude</div>
+                        <div>Excellent point! I'll include comprehensive edge case testing including invalid email formats, weak passwords, duplicate registrations, and malformed requests. Here are the test suites...</div>
+                    </div>
+                </div>
 
-        <div class="card" style="margin-top: 1.5rem;">
-            <div class="card-header">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3 class="card-title">Execution Log</h3>
-                    <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.875rem;">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7,10 12,15 17,10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                        Download
-                    </button>
+                <div class="message">
+                    <div class="message-avatar user-avatar">DU</div>
+                    <div class="message-content">
+                        <div class="message-header">You</div>
+                        <div>Perfect! Also add tests for JWT token expiration and refresh</div>
+                    </div>
+                </div>
+                
+                <div class="message">
+                    <div class="message-avatar ai-avatar">AI</div>
+                    <div class="message-content">
+                        <div class="message-header">Claude</div>
+                        <div>Done! I've added comprehensive JWT testing including token expiration, refresh token flow, and invalid token handling. All tests are now complete and passing. ✅</div>
+                    </div>
                 </div>
             </div>
-            <div class="card-content" style="padding: 0;">
-                <div class="log-container">
-                    <div class="log-line">
-                        <span class="log-timestamp">14:15:30</span>
-                        <span class="log-level-info">[INFO]</span> Session started: Optimize database queries for better performance
-                    </div>
-                    <div class="log-line">
-                        <span class="log-timestamp">14:15:32</span>
-                        <span class="log-level-info">[INFO]</span> Analyzing database query performance
-                    </div>
-                    <div class="log-line">
-                        <span class="log-timestamp">14:16:15</span>
-                        <span class="log-level-warning">[WARNING]</span> Found 5 slow queries without proper indexing
-                    </div>
-                    <div class="log-line">
-                        <span class="log-timestamp">14:16:45</span>
-                        <span class="log-level-info">[INFO]</span> Creating optimized database indexes
-                    </div>
-                    <div class="log-line">
-                        <span class="log-timestamp">14:18:22</span>
-                        <span class="log-level-success">[SUCCESS]</span> Database indexes created successfully
-                    </div>
-                    <div class="log-line">
-                        <span class="log-timestamp">14:19:10</span>
-                        <span class="log-level-info">[INFO]</span> Optimizing JOIN operations and subqueries
-                    </div>
-                    <div class="log-line">
-                        <span class="log-timestamp">14:21:35</span>
-                        <span class="log-level-success">[SUCCESS]</span> Query performance improved by 75%
-                    </div>
-                    <div class="log-line">
-                        <span class="log-timestamp">14:22:15</span>
-                        <span class="log-level-info">[INFO]</span> Updating query documentation
-                    </div>
-                    <div class="log-line">
-                        <span class="log-timestamp">14:23:48</span>
-                        <span class="log-level-success">[SUCCESS]</span> Database optimization completed successfully
-                    </div>
-                </div>
+            
+            <div class="chat-input">
+                <input type="text" placeholder="Session completed - no new messages" disabled style="flex: 1; background: #f8fafc; color: #64748b;">
+                <button class="btn btn-secondary" disabled>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13"/>
+                        <path d="M22 2l-7 20-4-9-9-4z"/>
+                    </svg>
+                    Send
+                </button>
             </div>
         </div>
     </main>
 
     <script>
+        // Extract model from URL parameter
+        var selectedModel = 'claude-sonnet-3.7'; // default
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('model')) {
+            selectedModel = urlParams.get('model');
+        }
+
+        // Update model display on page load
+        function updateModelDisplay() {
+            // Update page header description
+            var pageDescription = document.querySelector('.page-description');
+            if (pageDescription) {
+                pageDescription.textContent = 'Real-time AI coding session • ' + selectedModel + ' • Completed 30 minutes ago';
+            }
+        }
+
+        // Call on page load
+        window.addEventListener('load', updateModelDisplay);
+
         // User dropdown functionality
         function toggleUserDropdown() {
             const dropdown = document.getElementById('userDropdownMenu');
