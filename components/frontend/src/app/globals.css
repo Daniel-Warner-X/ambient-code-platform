@@ -66,63 +66,116 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.5 0.22 264);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.5 0.22 264);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
 
-  /* Status badge semantic colors - Light theme (pastel backgrounds) */
-  --status-success: oklch(0.95 0.05 145);
-  --status-success-foreground: oklch(0.35 0.15 145);
-  --status-success-border: oklch(0.85 0.08 145);
-  --status-error: oklch(0.95 0.05 27);
-  --status-error-foreground: oklch(0.45 0.2 27);
-  --status-error-border: oklch(0.85 0.08 27);
-  --status-warning: oklch(0.95 0.1 85);
-  --status-warning-foreground: oklch(0.4 0.15 85);
-  --status-warning-border: oklch(0.85 0.12 85);
-  --status-info: oklch(0.95 0.05 240);
-  --status-info-foreground: oklch(0.45 0.15 240);
-  --status-info-border: oklch(0.85 0.08 240);
+  /* ============================================
+     INCREDIBLE LIGHT THEME
+     Based on Gympass Yoga Design System
+     https://gympass.github.io/yoga/
 
-  /* Semantic link colors - Light theme */
-  --link: oklch(0.45 0.15 240);           /* Blue link color */
-  --link-hover: oklch(0.35 0.18 240);     /* Darker blue on hover */
+     A warm, energetic light theme using Yoga's
+     carefully crafted color palette for excellent
+     accessibility and visual harmony.
+     ============================================ */
 
-  /* Role badge colors - Light theme (pastel backgrounds) */
-  --role-view: oklch(0.95 0.05 240);           /* Blue for view role */
-  --role-view-foreground: oklch(0.45 0.15 240);
-  --role-edit: oklch(0.95 0.05 145);           /* Green for edit role */
-  --role-edit-foreground: oklch(0.35 0.15 145);
-  --role-admin: oklch(0.95 0.1 290);           /* Purple for admin role */
-  --role-admin-foreground: oklch(0.4 0.15 290);
+  /* Background Colors - Yoga's warm neutral palette */
+  --background: oklch(0.976 0.006 85);           /* clearNew #FAF9F5 - warm cream */
+  --foreground: oklch(0.165 0.005 75);           /* staminaNew #1D1D1F - near black */
+
+  /* Card & Surface Colors - Layered warmth */
+  --card: oklch(0.998 0 0);                      /* white #FFFFFF */
+  --card-foreground: oklch(0.165 0.005 75);      /* staminaNew #1D1D1F */
+  --popover: oklch(0.998 0 0);                   /* white #FFFFFF */
+  --popover-foreground: oklch(0.165 0.005 75);   /* staminaNew #1D1D1F */
+
+  /* Primary - Yoga hope green (teal-green, energetic yet calm) */
+  --primary: oklch(0.52 0.12 165);               /* hope #1D856C - vibrant teal-green */
+  --primary-foreground: oklch(0.998 0 0);        /* white */
+
+  /* Secondary - Yoga lightest neutral */
+  --secondary: oklch(0.935 0.008 85);            /* lightest #EFEDE7 */
+  --secondary-foreground: oklch(0.40 0.01 75);   /* deepNew #57544D */
+
+  /* Muted - Yoga light neutral for de-emphasized content */
+  --muted: oklch(0.90 0.01 85);                  /* lightNew #E1DED7 */
+  --muted-foreground: oklch(0.68 0.01 75);       /* mediumNew #A6A298 */
+
+  /* Accent - Yoga relaxNew purple (distinctive, creative) */
+  --accent: oklch(0.94 0.06 300);                /* Light purple tint from relaxNew */
+  --accent-foreground: oklch(0.45 0.18 300);     /* relaxNew #A880FF darker */
+
+  /* Destructive - Yoga verve (warm orange-red) */
+  --destructive: oklch(0.52 0.18 35);            /* verve #CA4808 */
+
+  /* Borders & Inputs - Yoga neutral scale */
+  --border: oklch(0.90 0.01 85);                 /* lightNew #E1DED7 */
+  --input: oklch(0.935 0.008 85);                /* lightest #EFEDE7 */
+  --ring: oklch(0.52 0.12 165);                  /* hope #1D856C */
+
+  /* Chart Colors - Yoga vibrant palette */
+  --chart-1: oklch(0.52 0.12 165);               /* hope #1D856C - teal-green */
+  --chart-2: oklch(0.82 0.14 85);                /* energy #FFC24C - golden yellow */
+  --chart-3: oklch(0.55 0.20 300);               /* relax #5340C9 - purple */
+  --chart-4: oklch(0.60 0.18 350);               /* upliftNew #D8385E - rose pink */
+  --chart-5: oklch(0.58 0.16 45);                /* brandingVerve #FF874C - orange */
+
+  /* Sidebar - Yoga sand (warm, inviting) */
+  --sidebar: oklch(0.975 0.015 90);              /* sand #FBF8EC */
+  --sidebar-foreground: oklch(0.165 0.005 75);   /* staminaNew #1D1D1F */
+  --sidebar-primary: oklch(0.52 0.12 165);       /* hope #1D856C */
+  --sidebar-primary-foreground: oklch(0.998 0 0);
+  --sidebar-accent: oklch(0.94 0.04 165);        /* Light hope tint */
+  --sidebar-accent-foreground: oklch(0.42 0.10 165);
+  --sidebar-border: oklch(0.90 0.01 85);         /* lightNew #E1DED7 */
+  --sidebar-ring: oklch(0.52 0.12 165);          /* hope #1D856C */
+
+  /* ============================================
+     Status Badge Semantic Colors - Light theme
+     Using Yoga feedback colors
+     ============================================ */
+
+  /* Success - Yoga hopeNew green */
+  --status-success: oklch(0.92 0.08 155);        /* successNew #E3EFC3 background */
+  --status-success-foreground: oklch(0.42 0.14 155); /* hopeNew #0C8046 */
+  --status-success-border: oklch(0.82 0.12 155);
+
+  /* Error - Yoga upliftNew rose */
+  --status-error: oklch(0.94 0.06 10);           /* yoga #FFEEF2 background */
+  --status-error-foreground: oklch(0.50 0.18 355); /* upliftNew #D8385E */
+  --status-error-border: oklch(0.85 0.10 10);
+
+  /* Warning - Yoga energy golden */
+  --status-warning: oklch(0.92 0.10 85);         /* attention #FCD6C3 lightened */
+  --status-warning-foreground: oklch(0.48 0.16 50); /* verve #CA4808 */
+  --status-warning-border: oklch(0.82 0.14 85);
+
+  /* Info - Yoga relax purple */
+  --status-info: oklch(0.92 0.06 290);           /* neutralNew #F0E0FF */
+  --status-info-foreground: oklch(0.45 0.18 290); /* relax #5340C9 */
+  --status-info-border: oklch(0.82 0.10 290);
+
+  /* ============================================
+     Semantic Link Colors - Light theme
+     Using Yoga hope green for consistency
+     ============================================ */
+  --link: oklch(0.48 0.12 165);                  /* hope #1D856C darkened */
+  --link-hover: oklch(0.40 0.14 165);            /* Darker on hover */
+
+  /* ============================================
+     Role Badge Colors - Light theme
+     Distinct Yoga colors for each role
+     ============================================ */
+
+  /* View - Yoga relax purple */
+  --role-view: oklch(0.92 0.06 290);             /* neutralNew #F0E0FF */
+  --role-view-foreground: oklch(0.45 0.18 290);  /* relax #5340C9 */
+
+  /* Edit - Yoga hope green */
+  --role-edit: oklch(0.92 0.08 155);             /* successNew #E3EFC3 */
+  --role-edit-foreground: oklch(0.42 0.14 155);  /* hopeNew #0C8046 */
+
+  /* Admin - Yoga upliftNew rose */
+  --role-admin: oklch(0.94 0.06 10);             /* yoga #FFEEF2 */
+  --role-admin-foreground: oklch(0.50 0.16 355); /* upliftNew #D8385E */
 }
 
 .dark {
